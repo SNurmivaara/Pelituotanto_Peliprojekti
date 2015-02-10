@@ -75,7 +75,7 @@ public class GamePanel extends JPanel implements KeyListener {
         int gWidth = getWidth() / cellSize;
         int gHeight = getHeight() / cellSize;
         
-        g.setColor(Color.BLUE);
+        g.setColor(Color.GRAY);
         
         for(int x = 0; x <= gWidth; x++)
             g.fillRect(x * cellSize, 0, GRID_WIDTH, getHeight());

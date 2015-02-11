@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 public class Interface extends JFrame {
 
     private void init(){
-        setTitle("Dimensions");
+        setTitle("Lännen kaksintaistelu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setResizable(false);

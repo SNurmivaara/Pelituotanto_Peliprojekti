@@ -166,6 +166,6 @@ public class GamePanel extends JPanel implements KeyListener {
     private final List<BufferedImage> images = new ArrayList() {{
         add(null);
         add(null);
-        add(initImage("images/White_Rook.png"));
+        add(initImage("images/Wall_Wooden.png"));
     }};
 }

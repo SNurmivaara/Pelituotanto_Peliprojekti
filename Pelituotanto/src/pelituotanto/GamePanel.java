@@ -134,6 +134,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
             this.repaint();
         }
+        
     }
 
     @Override
@@ -167,5 +168,7 @@ public class GamePanel extends JPanel implements KeyListener {
         add(null);
         add(null);
         add(initImage("images/Wall_Wooden.png"));
+        add(initImage("images/Wall_Brick.png"));
+        add(initImage("images/Stone_floor.png"));
     }};
 }

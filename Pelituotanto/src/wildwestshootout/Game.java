@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable {
     
     //Thread, JFrame, Keyboard kutsu
     private Thread thread;
-    private JFrame frame;
+    JFrame frame;
     private Keyboard key;
     
     //Tarkistus onko peli käynnissä. True = käynnissä | False = suljettu
@@ -46,6 +46,7 @@ public class Game extends Canvas implements Runnable {
     
     
     //Pelin konstruktori
+    
     public Game() {
         Dimension size = new Dimension(width * scale, height * scale);
         setPreferredSize(size);
@@ -156,8 +157,9 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
     }
-    
+    //muutos
     //Pelin päämetodi
+    /*
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
@@ -170,5 +172,6 @@ public class Game extends Canvas implements Runnable {
         
         game.start();
     }
+    */
     
 }

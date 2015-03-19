@@ -123,9 +123,12 @@ public class Game extends Canvas implements Runnable {
     int x = 0, y = 0;
     
     public void tick() {
+        //Liikkuminen (Up, Down, Left, Right)
         key.update();
-        x++;
-        y++;
+        if (key.up) y--;
+        if (key.down) y++;
+        if (key.left) x--;
+        if (key.right) x++;
     }
     
     
@@ -140,7 +143,7 @@ public class Game extends Canvas implements Runnable {
         
         //Tyhjennetään ruutu ja sen jälkeen renderöidään uudestaan
         screen.clear();
-        screen.render();
+        screen.render(x, y);
         
         //Kopioidaan pixels[] muuttujan arvot screen.pixels[] muuttujaan
         for (int i = 0; i < pixels.length; i++) {

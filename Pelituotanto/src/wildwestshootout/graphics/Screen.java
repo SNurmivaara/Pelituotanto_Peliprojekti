@@ -45,15 +45,15 @@ public class Screen {
     
     
     //Renderöidään kuva
-    public void render() {
+    public void render(int xOffset, int yOffset) {
         for (int y = 0; y < height; y++) {
-            int yy = y;
+            int yy = y + yOffset;
             
-            if (yy >= height || yy < 0) break;
+//            if (yy >= height || yy < 0) break;
             
             for (int x = 0; x < width; x++) {
-                int xx = x;
-                if (xx >= width || xx < 0) break;
+                int xx = x + xOffset;
+//                if (xx >= width || xx < 0) break;
                 int tileIndex = (xx >> 4 & MAP_SIZE_MASK) + (yy >> 4 & MAP_SIZE_MASK) * MAP_SIZE;
                 pixels[x + y * width] = tiles[tileIndex];
             }

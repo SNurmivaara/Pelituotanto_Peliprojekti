@@ -8,15 +8,24 @@ import java.util.Random;
  */
 public class Screen {
     
+    //Määritetään muuttujat width, height ja pixels[]
     private int width, height;
     public int[] pixels;
+    
+    //Kerrotaan pelille kartan koko
     public final int MAP_SIZE = 64;
+    
+    //Luodaan kartan koosta "maski"
     public final int MAP_SIZE_MASK = MAP_SIZE - 1;
     
+    //Määritellään montako ruutua pelikentässä on
     public int[] tiles = new int[64 * 64];
     
+    //Määritellään Random() metodi
     private Random random = new Random();
     
+    
+    //Piirretään kentälle ruutuja. Tällä hetkellä piirtää vain random luokalla generoituja erivärisiä ruutuja
     public Screen(int width, int height) {
         this.width = width;
         this.height = height;
@@ -27,12 +36,15 @@ public class Screen {
         }
     }
     
+    //Tyhjennetään ruutu
     public void clear() {
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = 0;
         }
     }
     
+    
+    //Renderöidään kuva
     public void render() {
         for (int y = 0; y < height; y++) {
             int yy = y;

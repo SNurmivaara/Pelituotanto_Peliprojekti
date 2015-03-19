@@ -97,6 +97,9 @@ public class GamePanel extends JPanel implements KeyListener {
         int y = unit.getY();
         
         switch(key){
+            case KeyEvent.VK_SPACE:
+                y=2;
+                  break;
             case KeyEvent.VK_UP : 
                 y = y - (y > 0 ? 1 : 0);
                 if(!collides(x,y))

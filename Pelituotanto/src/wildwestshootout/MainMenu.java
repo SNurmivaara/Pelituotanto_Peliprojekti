@@ -28,7 +28,7 @@ public class MainMenu extends JFrame {
     private JButton btLopeta = new JButton("Lopeta");
     
     public MainMenu(){
-        this.setTitle("Lännen kaksintaistelu");
+        this.setTitle("Wild West Shootout!");
         this.setSize(260, 300);
         this.setLocation(550, 250);
         

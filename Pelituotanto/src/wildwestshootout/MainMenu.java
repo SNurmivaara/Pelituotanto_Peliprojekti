@@ -91,7 +91,7 @@ public class MainMenu extends JFrame {
     class  lTekijat implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae){
-            JOptionPane.showMessageDialog(rootPane, "Sami Nurmivaara \n Jesse Vuori \n Toni Liivola \n Ville Vihervaara \n Ville Henriksson", "Tekijät", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Sami Nurmivaara\nJesse Vuori\nToni Liivola\nVille Vihervaara\nVille Henriksson", "Tekijät", JOptionPane.PLAIN_MESSAGE);
         }
     }
     

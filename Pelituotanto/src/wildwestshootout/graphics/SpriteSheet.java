@@ -16,8 +16,11 @@ public class SpriteSheet {
     private String path;
     
     //kuvan koko ja pikselit sisältävä lista
-    private final int SIZE;
+    public final int SIZE;
     public int[] pixels;
+    
+    //Ladataan mahdolliset Sprite -taulukot (sijainti, koko)
+    public static SpriteSheet tiles = new SpriteSheet("/textures/spritesheet.png", 256);
 
     //Konstruktori jolle määritellään tiedoston polku, koko sekä pikseli lista vastaamaan koko * koko
     public SpriteSheet(String path, int size) {

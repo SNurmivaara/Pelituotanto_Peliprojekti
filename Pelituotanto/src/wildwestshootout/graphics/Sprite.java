@@ -25,7 +25,7 @@ public class Sprite {
     
     //load() metodi joka lataa tietyt pikselit (tietyn Spriten määritellystä SpriteSheet:istä
     private void load() {
-        for (int y = 0; y < this.SIZE; y++) {
+        for (int y = 0; y < SIZE; y++) {
             for (int x = 0; x < SIZE; x++) {
                 pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
             }

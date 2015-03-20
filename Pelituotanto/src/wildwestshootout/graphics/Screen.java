@@ -1,6 +1,7 @@
 package wildwestshootout.graphics;
 
 import java.util.Random;
+import wildwestshootout.level.tile.Tile;
 
 /**
  *
@@ -47,16 +48,20 @@ public class Screen {
     //Renderöidään kuva
     public void render(int xOffset, int yOffset) {
         for (int y = 0; y < height; y++) {
-            int yy = y + yOffset;
-            
-//            if (yy >= height || yy < 0) break;
-            
+            int yp = y + yOffset;
+            if (yp < 0 || yp >= height) continue;
             for (int x = 0; x < width; x++) {
-                int xx = x + xOffset;
-//                if (xx >= width || xx < 0) break;
-                int tileIndex = (xx >> 4 & MAP_SIZE_MASK) + (yy >> 4 & MAP_SIZE_MASK) * MAP_SIZE;
-                pixels[x + y * width] = Sprite.sand.pixels[(x & 15) + (y & 15) * Sprite.sand.SIZE];
+                int xp = x + xOffset;
+                if (xp < 0 || xp >= width) continue;
+                pixels[xp + yp * width] = Sprite.sand.pixels[(x & 15) + (y & 15) * Sprite.sand.SIZE];
             }
+        }
+    }
+    
+    
+    public void renderTile(int xp, int yp, Tile tile) {
+        for (int y = 0; y < tile.sprite.SIZE; y++) {
+            int yAbsolute = y + yp;
         }
     }
     

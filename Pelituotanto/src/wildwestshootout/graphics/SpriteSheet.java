@@ -27,6 +27,7 @@ public class SpriteSheet {
         this.path = path;
         this.SIZE = size;
         this.pixels = new int[SIZE * SIZE];
+        load();
     }
 
     

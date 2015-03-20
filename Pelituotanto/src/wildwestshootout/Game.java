@@ -92,6 +92,7 @@ public class Game extends Canvas implements Runnable {
         //Muuttujat Updates-per-second ja frames-per-second varten
         int updates = 0, frames = 0;
         
+        requestFocus();
         
         while (running) {
             
@@ -126,10 +127,10 @@ public class Game extends Canvas implements Runnable {
     public void tick() {
         //Liikkuminen (Up, Down, Left, Right)
         key.update();
-        if (key.up) y--;
-        if (key.down) y++;
-        if (key.left) x--;
-        if (key.right) x++;
+        if (key.up) y++;
+        if (key.down) y--;
+        if (key.left) x++;
+        if (key.right) x--;
     }
     
     

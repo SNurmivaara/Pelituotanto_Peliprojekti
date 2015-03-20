@@ -14,11 +14,11 @@ public class SpriteSheet {
 
     //Tekstuurit-kuvan lataaminen
     private String path;
-    
+
     //kuvan koko ja pikselit sisältävä lista
     public final int SIZE;
     public int[] pixels;
-    
+
     //Ladataan mahdolliset Sprite -taulukot (sijainti, koko)
     public static SpriteSheet tiles = new SpriteSheet("/textures/spritesheet.png", 256);
 
@@ -30,7 +30,6 @@ public class SpriteSheet {
         load();
     }
 
-    
     //Ladataan tekstuurit-kuva
     private void load() {
         try {

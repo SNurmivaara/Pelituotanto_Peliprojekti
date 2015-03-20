@@ -8,11 +8,11 @@ import java.awt.event.KeyListener;
  * @author Sami
  */
 public class Keyboard implements KeyListener {
-    
+
     //Määritellään muuttuja keys[] ka up, down, left & right
     private boolean[] keys = new boolean[120];
     public boolean up, down, left, right;
-    
+
     //Asetetaan liikkumisnäppäimiksi ylös, alas, oikealle, vasemmalle sekä WASD
     public void update() {
         up = keys[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
@@ -31,5 +31,5 @@ public class Keyboard implements KeyListener {
     public void keyReleased(KeyEvent ke) {
         keys[ke.getKeyCode()] = false;
     }
-    
+
 }

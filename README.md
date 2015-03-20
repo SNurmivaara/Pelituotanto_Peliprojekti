@@ -1,4 +1,14 @@
-Peli
-====
+Pelituotanto
+==============================
+Pelituotannon peliprojekti
 
-Mikä lie länkkäri peli.
+TO-DO LIST
+==============================
+- Kartat
+- (tekoäly?)
+- pelaajat
+- liikkuminen
+- animaatiot
+- collision detection
+- hiiri-input
+- projektiilit

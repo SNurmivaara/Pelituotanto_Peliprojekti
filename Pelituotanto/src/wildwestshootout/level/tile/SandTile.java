@@ -14,7 +14,7 @@ public class SandTile extends Tile {
     }
 
     public void render(int x, int y, Screen screen) {
-        //Tee renderöinti tähän!
+        screen.renderTile(x, y, this);
     }
 
 }

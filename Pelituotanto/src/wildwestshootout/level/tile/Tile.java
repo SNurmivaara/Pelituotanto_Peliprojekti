@@ -13,6 +13,7 @@ public class Tile {
     public Sprite sprite;
 
     public static Tile sand = new SandTile(Sprite.sand);
+    public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 
     public Tile(Sprite sprite) {
         this.sprite = sprite;

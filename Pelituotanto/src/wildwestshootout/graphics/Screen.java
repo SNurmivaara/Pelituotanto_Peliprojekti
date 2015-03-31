@@ -10,7 +10,7 @@ import wildwestshootout.level.tile.Tile;
 public class Screen {
 
     //Määritetään muuttujat width, height ja pixels[]
-    private int width, height;
+    public int width, height;
     public int[] pixels;
 
     //Kerrotaan pelille kartan koko
@@ -18,6 +18,9 @@ public class Screen {
 
     //Luodaan kartan koosta "maski"
     public final int MAP_SIZE_MASK = MAP_SIZE - 1;
+
+    //Luodaan muuttujat kartan offsetille
+    public int xOffset, yOffset;
 
     //Määritellään montako ruutua pelikentässä on
     public int[] tiles = new int[64 * 64];
@@ -43,34 +46,29 @@ public class Screen {
         }
     }
 
-    //Renderöidään kuva
-    public void render(int xOffset, int yOffset) {
-        for (int y = 0; y < height; y++) {
-            int yp = y + yOffset;
-            if (yp < 0 || yp >= height) {
-                continue;
-            }
-            for (int x = 0; x < width; x++) {
-                int xp = x + xOffset;
-                if (xp < 0 || xp >= width) {
-                    continue;
-                }
-                pixels[xp + yp * width] = Sprite.sand.pixels[(x & 15) + (y & 15) * Sprite.sand.SIZE];
-            }
-        }
-    }
-
     public void renderTile(int xp, int yp, Tile tile) {
+        xp -= this.xOffset;
+        yp -= this.yOffset;
         for (int y = 0; y < tile.sprite.SIZE; y++) {
             int yAbsolute = y + yp;
             for (int x = 0; x < tile.sprite.SIZE; x++) {
                 int xAbsolute = x + xp;
-                if (xAbsolute < 0 || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= width) {
+                if (xAbsolute < -tile.sprite.SIZE || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) {
                     break;
                 }
-                pixels[xAbsolute + yAbsolute * width] = tile.sprite.pixels[x+y*tile.sprite.SIZE];
+                
+                if (xAbsolute < 0) {
+                    xAbsolute = 0;
+                }
+                
+                pixels[xAbsolute + yAbsolute * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
             }
         }
+    }
+
+    public void setOffset(int xOffset, int yOffset) {
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
     }
 
 }

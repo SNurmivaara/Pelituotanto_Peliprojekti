@@ -10,6 +10,8 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.input.Keyboard;
+import wildwestshootout.level.Level;
+import wildwestshootout.level.RandomLevel;
 
 /**
  *
@@ -28,10 +30,11 @@ public class Game extends Canvas implements Runnable {
     public static int scale = 3;
     public static String title = "Wild West Shootout!";
     
-    //Thread, JFrame, Keyboard kutsu
+    //Thread, JFrame, Keyboard, Level kutsu
     private Thread thread;
     JFrame frame;
     private Keyboard key;
+    private Level level;
     
     //Tarkistus onko peli käynnissä. True = käynnissä | False = suljettu
     private boolean running = false;
@@ -56,6 +59,8 @@ public class Game extends Canvas implements Runnable {
         frame = new JFrame();
         
         key = new Keyboard();
+        
+        level = new RandomLevel(64, 64);
         
         addKeyListener(key);
     }
@@ -127,10 +132,10 @@ public class Game extends Canvas implements Runnable {
     public void tick() {
         //Liikkuminen (Up, Down, Left, Right)
         key.update();
-        if (key.up) y++;
-        if (key.down) y--;
-        if (key.left) x++;
-        if (key.right) x--;
+        if (key.up) y--;
+        if (key.down) y++;
+        if (key.left) x--;
+        if (key.right) x++;
     }
     
     
@@ -145,7 +150,7 @@ public class Game extends Canvas implements Runnable {
         
         //Tyhjennetään ruutu ja sen jälkeen renderöidään uudestaan
         screen.clear();
-        screen.render(x, y);
+        level.render(this.x, this.y, this.screen);
         
         //Kopioidaan pixels[] muuttujan arvot screen.pixels[] muuttujaan
         for (int i = 0; i < pixels.length; i++) {

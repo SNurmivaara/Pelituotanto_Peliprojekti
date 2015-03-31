@@ -14,7 +14,7 @@ public class SandTile extends Tile {
     }
 
     public void render(int x, int y, Screen screen) {
-        screen.renderTile(x, y, this);
+        screen.renderTile(x << 4, y << 4, this); // << 4 = * 16
     }
 
 }

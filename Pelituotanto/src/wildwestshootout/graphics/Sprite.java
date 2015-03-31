@@ -13,7 +13,7 @@ public class Sprite {
 
     //Sprite -lisääminen! Täyttö: (Koko (pikseleitä X * X), Y koordinaatti, X koordinaatti, Spritesheet joka kyseessä)
     public static Sprite sand = new Sprite(16, 0, 0, SpriteSheet.tiles);
-    public static Sprite voidSprite = new Sprite(16, 0);
+    public static Sprite voidSprite = new Sprite(16, 0x1B87E0);
 
     //Konstruktori
     public Sprite(int size, int x, int y, SpriteSheet sheet) {

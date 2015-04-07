@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
+import wildwestshootout.entity.mob.Player;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.input.Keyboard;
 import wildwestshootout.level.Level;
@@ -35,6 +36,7 @@ public class Game extends Canvas implements Runnable {
     JFrame frame;
     private Keyboard key;
     private Level level;
+    private Player player;
     
     //Tarkistus onko peli käynnissä. True = käynnissä | False = suljettu
     private boolean running = false;
@@ -55,12 +57,10 @@ public class Game extends Canvas implements Runnable {
         setPreferredSize(size);
         
         screen = new Screen(width, height);
-        
         frame = new JFrame();
-        
         key = new Keyboard();
-        
         level = new RandomLevel(64, 64);
+        player = new Player(key);
         
         addKeyListener(key);
     }
@@ -106,7 +106,7 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) / ns;
             lastTime = now;
             while (delta >= 1) {
-                tick();
+                update();
                 updates++;
                 delta--;
             }
@@ -126,16 +126,10 @@ public class Game extends Canvas implements Runnable {
         stop();
     }
     
-    //Yksinkertainen tick() metodi ja sen muuttujat x ja y
-    int x = 0, y = 0;
     
-    public void tick() {
-        //Liikkuminen (Up, Down, Left, Right)
+    public void update() {
         key.update();
-        if (key.up) y--;
-        if (key.down) y++;
-        if (key.left) x--;
-        if (key.right) x++;
+        player.update();
     }
     
     
@@ -150,7 +144,10 @@ public class Game extends Canvas implements Runnable {
         
         //Tyhjennetään ruutu ja sen jälkeen renderöidään uudestaan
         screen.clear();
-        level.render(this.x, this.y, this.screen);
+        int xScroll = player.x - screen.width / 2;
+        int yScroll = player.y - screen.height / 2;
+        level.render(xScroll, yScroll, this.screen);
+        player.render(screen);
         
         //Kopioidaan pixels[] muuttujan arvot screen.pixels[] muuttujaan
         for (int i = 0; i < pixels.length; i++) {

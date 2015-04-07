@@ -1,6 +1,7 @@
 package wildwestshootout.graphics;
 
 import java.util.Random;
+import wildwestshootout.entity.mob.Player;
 import wildwestshootout.level.tile.Tile;
 
 /**
@@ -62,6 +63,26 @@ public class Screen {
                 }
                 
                 pixels[xAbsolute + yAbsolute * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+            }
+        }
+    }
+    
+    public void renderDoubleTile(int xp, int yp, Sprite sprite){
+        xp -= this.xOffset;
+        yp -= this.yOffset;
+        for (int y = 0; y < 16; y++) {
+            int yAbsolute = y + yp;
+            for (int x = 0; x < 16; x++) {
+                int xAbsolute = x + xp;
+                if (xAbsolute < -16 || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) {
+                    break;
+                }
+                
+                if (xAbsolute < 0) {
+                    xAbsolute = 0;
+                }
+                
+                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[x + y * 16];
             }
         }
     }

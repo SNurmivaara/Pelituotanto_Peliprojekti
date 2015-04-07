@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sami/Documents/NetBeansProjects/Pelituotanto/Pelituotanto/src/wildwestshootout/level/tile/Tile.java</file>
-            <file>file:/C:/Users/Sami/Documents/NetBeansProjects/Pelituotanto/Pelituotanto/src/wildwestshootout/graphics/Screen.java</file>
-            <file>file:/C:/Users/Sami/Documents/NetBeansProjects/Pelituotanto/Pelituotanto/src/wildwestshootout/level/RandomLevel.java</file>
-            <file>file:/C:/Users/Sami/Documents/NetBeansProjects/Pelituotanto/Pelituotanto/src/wildwestshootout/level/Level.java</file>
-            <file>file:/C:/Users/Sami/Documents/NetBeansProjects/Pelituotanto/Pelituotanto/src/wildwestshootout/level/tile/SandTile.java</file>
+            <file>file:/C:/Users/Sami/Documents/NetBeansProjects/Pelituotanto/Pelituotanto/src/wildwestshootout/Game.java</file>
+            <file>file:/C:/Users/Sami/Documents/NetBeansProjects/Pelituotanto/Pelituotanto/src/wildwestshootout/entity/Entity.java</file>
+            <file>file:/C:/Users/Sami/Documents/NetBeansProjects/Pelituotanto/Pelituotanto/src/wildwestshootout/entity/mob/Player.java</file>
+            <file>file:/C:/Users/Sami/Documents/NetBeansProjects/Pelituotanto/Pelituotanto/src/wildwestshootout/entity/mob/Mob.java</file>
         </group>
     </open-files>
 </project-private>

@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.input.Keyboard;
+import wildwestshootout.level.FirstLevel;
 import wildwestshootout.level.Level;
 import wildwestshootout.level.RandomLevel;
 
@@ -59,7 +60,7 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
-        level = new RandomLevel(64, 64);
+        level = new FirstLevel("/textures/FirstLevel.png");
         player = new Player(key);
         
         addKeyListener(key);

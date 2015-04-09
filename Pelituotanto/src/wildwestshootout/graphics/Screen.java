@@ -70,11 +70,11 @@ public class Screen {
     public void renderDoubleTile(int xp, int yp, Sprite sprite){
         xp -= this.xOffset;
         yp -= this.yOffset;
-        for (int y = 0; y < 16; y++) {
+        for (int y = 0; y < 32; y++) {
             int yAbsolute = y + yp;
-            for (int x = 0; x < 16; x++) {
+            for (int x = 0; x < 32; x++) {
                 int xAbsolute = x + xp;
-                if (xAbsolute < -16 || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) {
+                if (xAbsolute < -32 || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) {
                     break;
                 }
                 
@@ -82,7 +82,11 @@ public class Screen {
                     xAbsolute = 0;
                 }
                 
-                pixels[xAbsolute + yAbsolute * width] = sprite.pixels[x + y * 16];
+                int col = sprite.pixels[x + y * 32];
+                if (col != 0xFFFF00FF) {
+                    pixels[xAbsolute + yAbsolute * width] = col;
+                }
+                
             }
         }
     }

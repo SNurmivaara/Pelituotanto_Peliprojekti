@@ -14,15 +14,19 @@ public abstract class Mob extends Entity {
     protected boolean moving = false;
 
     public void move(int xa, int ya) {
+        //vasen
         if (xa > 0) {
             this.direction = 1;
         }
+        //oikea
         if (xa < 0) {
             this.direction = 3;
         }
+        //ylös
         if (ya > 0) {
             this.direction = 2;
         }
+        //alas
         if (ya < 0) {
             this.direction = 0;
         }

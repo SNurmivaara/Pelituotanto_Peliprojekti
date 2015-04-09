@@ -13,12 +13,28 @@ public class Sprite {
 
     //Sprite -lisääminen! Täyttö: (Koko (pikseleitä X * X), Y koordinaatti, X koordinaatti, Spritesheet joka kyseessä)
     public static Sprite sand = new Sprite(16, 0, 0, SpriteSheet.tiles);
+    public static Sprite concrete = new Sprite(16, 1, 0, SpriteSheet.tiles);
+    public static Sprite sandCactus = new Sprite(16, 2, 0, SpriteSheet.tiles);
+    public static Sprite sandRock = new Sprite(16, 3, 0, SpriteSheet.tiles);
+    
     public static Sprite voidSprite = new Sprite(16, 0x1B87E0);
     
-    public static Sprite player0 = new Sprite(16, 0, 10, SpriteSheet.tiles);
-    public static Sprite player1 = new Sprite(16, 1, 10, SpriteSheet.tiles);
-    public static Sprite player2 = new Sprite(16, 0, 11, SpriteSheet.tiles);
-    public static Sprite player3 = new Sprite(16, 1, 11, SpriteSheet.tiles);
+    public static Sprite player_front = new Sprite(32, 0, 5, SpriteSheet.tiles);
+    public static Sprite player_back = new Sprite(32, 0, 6, SpriteSheet.tiles);
+    public static Sprite player_left = new Sprite(32, 2, 4, SpriteSheet.tiles);
+    public static Sprite player_right = new Sprite(32, 5, 7, SpriteSheet.tiles);
+    
+    public static Sprite player_front_1 = new Sprite(32, 2, 5, SpriteSheet.tiles);
+    public static Sprite player_front_2 = new Sprite(32, 6, 5, SpriteSheet.tiles);
+    
+    public static Sprite player_back_1 = new Sprite(32, 2, 6, SpriteSheet.tiles);
+    public static Sprite player_back_2 = new Sprite(32, 6, 6, SpriteSheet.tiles);
+    
+    public static Sprite player_left_1 = new Sprite(32, 1, 4, SpriteSheet.tiles);
+    public static Sprite player_left_2 = new Sprite(32, 3, 4, SpriteSheet.tiles);
+    
+    public static Sprite player_right_1 = new Sprite(32, 4, 7, SpriteSheet.tiles);
+    public static Sprite player_right_2 = new Sprite(32, 6, 7, SpriteSheet.tiles);
 
     //Konstruktori
     public Sprite(int size, int x, int y, SpriteSheet sheet) {

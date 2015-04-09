@@ -13,6 +13,9 @@ public class Tile {
     public Sprite sprite;
 
     public static Tile sand = new SandTile(Sprite.sand);
+    public static Tile concrete = new ConcreteTile(Sprite.concrete);
+    public static Tile sandCactus = new SandCactusTile(Sprite.sandCactus);
+    public static Tile sandRock = new SandRockTile(Sprite.sandRock);
     public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 
     public Tile(Sprite sprite) {

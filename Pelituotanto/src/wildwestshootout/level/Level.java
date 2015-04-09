@@ -9,13 +9,14 @@ import wildwestshootout.level.tile.Tile;
  */
 public class Level {
 
+    protected Tile[] tiles;
     protected int width, height;
-    protected int[] tiles;
+    protected int[] tilesInt;
 
     public Level(int width, int height) {
         this.width = width;
         this.height = height;
-        tiles = new int[width * height];
+        tilesInt = new int[width * height];
         generateLevel();
     }
 
@@ -26,7 +27,7 @@ public class Level {
     protected void generateLevel() {
     }
 
-    private void loadLevel(String path) {
+    protected void loadLevel(String path) {
     }
 
     public void update() {
@@ -44,7 +45,12 @@ public class Level {
 
         for (int y = y0; y < y1; y++) {
             for (int x = x0; x < x1; x++) {
-                getTile(x, y).render(x, y, screen);
+//              getTile(x, y).render(x, y, screen);
+                if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
+                    Tile.voidTile.render(x, y, screen);
+                } else {
+                    tiles[x + y * 16].render(x, y, screen);
+                }
 
             }
         }
@@ -56,16 +62,22 @@ public class Level {
             return Tile.voidTile;
         }
 
-        /** Päätellään mikä Tile palautetaan
-         * 0 = hiekka
-         * 
-         * 
-         * 
-         * mikäli numero ei vastaa mitään spriteä palautetaan voidTile
+        /**
+         * Päätellään mikä Tile palautetaan 0 = hiekka 1 = betoni 2 = hiekka
+         * jolla on kaktus 3 = hiekka jolla on kivi mikäli numero ei vastaa
+         * mitään spriteä palautetaan voidTile
          */
-        
-        if (tiles[x + y * width] == 0) {
+        if (tilesInt[x + y * width] == 0) {
             return Tile.sand;
+        }
+        if (tilesInt[x + y * width] == 1) {
+            return Tile.concrete;
+        }
+        if (tilesInt[x + y * width] == 2) {
+            return Tile.sandCactus;
+        }
+        if (tilesInt[x + y * width] == 3) {
+            return Tile.sandRock;
         }
 
         return Tile.voidTile;

@@ -9,9 +9,9 @@ import wildwestshootout.level.tile.Tile;
  */
 public class Level {
 
-    protected Tile[] tiles;
     protected int width, height;
     protected int[] tilesInt;
+    protected int[] tiles;
 
     public Level(int width, int height) {
         this.width = width;
@@ -22,6 +22,7 @@ public class Level {
 
     public Level(String path) {
         loadLevel(path);
+        generateLevel();
     }
 
     protected void generateLevel() {
@@ -45,13 +46,7 @@ public class Level {
 
         for (int y = y0; y < y1; y++) {
             for (int x = x0; x < x1; x++) {
-//              getTile(x, y).render(x, y, screen);
-                if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
-                    Tile.voidTile.render(x, y, screen);
-                } else {
-                    tiles[x + y * 16].render(x, y, screen);
-                }
-
+                getTile(x, y).render(x, y, screen);
             }
         }
     }
@@ -63,20 +58,21 @@ public class Level {
         }
 
         /**
-         * Päätellään mikä Tile palautetaan 0 = hiekka 1 = betoni 2 = hiekka
-         * jolla on kaktus 3 = hiekka jolla on kivi mikäli numero ei vastaa
-         * mitään spriteä palautetaan voidTile
+         * Hiekka = 0xFFFFFF00 
+         * Betoni = 0xFF808080 
+         * Kaktus hiekalla = 0xFFAAD800
+         * Kivi hiekalla = 0xFFCEAC00
          */
-        if (tilesInt[x + y * width] == 0) {
+        if (tiles[x + y * width] == 0xFFFFFF00) {
             return Tile.sand;
         }
-        if (tilesInt[x + y * width] == 1) {
+        if (tiles[x + y * width] == 0xFF808080) {
             return Tile.concrete;
         }
-        if (tilesInt[x + y * width] == 2) {
+        if (tiles[x + y * width] == 0xFFAAD800) {
             return Tile.sandCactus;
         }
-        if (tilesInt[x + y * width] == 3) {
+        if (tiles[x + y * width] == 0xFFCEAC00) {
             return Tile.sandRock;
         }
 

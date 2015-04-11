@@ -61,7 +61,7 @@ public class Game extends Canvas implements Runnable {
         frame = new JFrame();
         key = new Keyboard();
         level = new FirstLevel("/textures/FirstLevel.png");
-        player = new Player(key);
+        player = new Player(0, 0, key);
         
         addKeyListener(key);
     }

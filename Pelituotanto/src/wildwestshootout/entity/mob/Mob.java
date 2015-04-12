@@ -16,8 +16,7 @@ public abstract class Mob extends Entity {
     protected Sprite sprite;
     protected int direction = 0;
     protected boolean moving = false;
-    
-    protected List<Projectile> projectiles = new ArrayList<>();
+    protected boolean walking = false;
 
     public void move(int xa, int ya) {
         //Jos liikutaan kahdella akselilla, suoritetaan kaksi move() metodia
@@ -53,12 +52,12 @@ public abstract class Mob extends Entity {
 
     @Override
     public void update() {
+        
     }
     
     protected void shoot(int x, int y, double direction) {
         Projectile projectile = new BulletProjectile(x, y, direction);
-        projectiles.add(projectile);
-        level.add(projectile);
+        level.addProjectile(projectile);
     }
 
     private boolean collision(int xa, int ya) {

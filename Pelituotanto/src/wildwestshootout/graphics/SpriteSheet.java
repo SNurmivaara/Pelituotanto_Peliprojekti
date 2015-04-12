@@ -21,7 +21,7 @@ public class SpriteSheet {
 
     //Ladataan mahdolliset Sprite -taulukot (sijainti, koko)
     public static SpriteSheet tiles = new SpriteSheet("/textures/sheets/spritesheet.png", 256);
-    public static SpriteSheet projectile_musket = new SpriteSheet("/textures/sheets/projectiles/projectile_musket.png", 256);
+    public static SpriteSheet projectile_musket = new SpriteSheet("/textures/sheets/projectiles/projectile_musket.png", 48);
 
     //Konstruktori jolle määritellään tiedoston polku, koko sekä pikseli lista vastaamaan koko * koko
     public SpriteSheet(String path, int size) {

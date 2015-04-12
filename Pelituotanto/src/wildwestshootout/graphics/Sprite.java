@@ -39,7 +39,7 @@ public class Sprite {
     public static Sprite player_right_2 = new Sprite(32, 6, 7, SpriteSheet.tiles);
     
     //Ammus-spritet
-    public static Sprite revolverBullet = new Sprite(32, 0, 5, SpriteSheet.tiles); //Tällä hetkellä placeholderina hiekkaa!
+    public static Sprite musketBullet = new Sprite(16, 0, 0, SpriteSheet.projectile_musket);
 
     //Konstruktori
     public Sprite(int size, int x, int y, SpriteSheet sheet) {

@@ -10,9 +10,11 @@ public abstract class Projectile extends Entity {
     
     protected final int xOrigin, yOrigin;
     protected double angle;
-    protected Sprite sprite;
+    public Sprite sprite;
+    protected double x, y;
     protected double nx, ny;
-    protected double speed, rateOfFire, range, damage;
+    protected double distance;
+    protected double speed, range, damage;
     
     public Projectile(int xOrigin, int yOrigin, double direction) {
         this.xOrigin = xOrigin;
@@ -20,6 +22,14 @@ public abstract class Projectile extends Entity {
         this.angle = direction;
         this.x = xOrigin;
         this.y = yOrigin;
+    }
+    
+    public Sprite getSprite(){
+        return sprite;
+    }
+    
+    public int getSpriteSize() {
+        return sprite.SIZE;
     }
     
     protected void move() {

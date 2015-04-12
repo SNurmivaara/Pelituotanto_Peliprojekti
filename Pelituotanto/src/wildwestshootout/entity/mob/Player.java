@@ -1,6 +1,8 @@
 package wildwestshootout.entity.mob;
 
 import wildwestshootout.Game;
+import wildwestshootout.entity.BulletProjectile;
+import wildwestshootout.entity.Projectile;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
 import wildwestshootout.input.Keyboard;
@@ -16,6 +18,9 @@ public class Player extends Mob {
     private Sprite sprite;
     private int animation = 0;
     private boolean walking = false;
+    
+    Projectile p;
+    private int reloadSpeed = 0;
 
     public Player(Keyboard input) {
         this.input = input;
@@ -26,10 +31,14 @@ public class Player extends Mob {
         this.x = x;
         this.y = y;
         this.input = input;
+        reloadSpeed = BulletProjectile.RELOAD_SPEED;
     }
 
     @Override
     public void update() {
+        if (reloadSpeed > 0) {
+            reloadSpeed--;
+        }
         int xa = 0, ya = 0;
 
         if (animation < 7500) {
@@ -56,7 +65,7 @@ public class Player extends Mob {
         } else {
             walking = false;
         }
-
+        clear();
         updateShooting();
     }
 
@@ -108,11 +117,21 @@ public class Player extends Mob {
     }
 
     private void updateShooting() {
-        if (Mouse.getButton() == 1) {
+        if (Mouse.getButton() == 1 && reloadSpeed <= 0) {
             double dx = Mouse.getX() - Game.getWindowWidth() / 2;
             double dy = Mouse.getY() - Game.getWindowHeight() / 2;
             double dir = Math.atan2(dy, dx);
             shoot(x, y, dir);
+            reloadSpeed = BulletProjectile.RELOAD_SPEED;
+        }
+    }
+
+    private void clear() {
+        for (int i = 0; i < level.getProjectiles().size(); i++) {
+            Projectile p = level.getProjectiles().get(i);
+            if (p.isRemoved()) {
+                level.getProjectiles().remove(i);
+            }
         }
     }
 

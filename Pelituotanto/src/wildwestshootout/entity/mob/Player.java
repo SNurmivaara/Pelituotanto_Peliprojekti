@@ -1,8 +1,10 @@
 package wildwestshootout.entity.mob;
 
+import wildwestshootout.Game;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
 import wildwestshootout.input.Keyboard;
+import wildwestshootout.input.Mouse;
 
 /**
  *
@@ -29,7 +31,7 @@ public class Player extends Mob {
     @Override
     public void update() {
         int xa = 0, ya = 0;
-        
+
         if (animation < 7500) {
             animation++;
         } else {
@@ -48,13 +50,14 @@ public class Player extends Mob {
         if (input.right) {
             xa++;
         }
-
         if (xa != 0 || ya != 0) {
             move(xa, ya);
             walking = true;
         } else {
             walking = false;
         }
+
+        updateShooting();
     }
 
     @Override
@@ -102,6 +105,15 @@ public class Player extends Mob {
         }
 
         screen.renderDoubleTile(x - 16, y - 16, sprite);
+    }
+
+    private void updateShooting() {
+        if (Mouse.getButton() == 1) {
+            double dx = Mouse.getX() - Game.getWindowWidth() / 2;
+            double dy = Mouse.getY() - Game.getWindowHeight() / 2;
+            double dir = Math.atan2(dy, dx);
+            shoot(x, y, dir);
+        }
     }
 
 }

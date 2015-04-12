@@ -11,14 +11,16 @@ public class Sprite {
     public int[] pixels;
     private SpriteSheet sheet;
 
-    //Sprite -lisääminen! Täyttö: (Koko (pikseleitä X * X), Y koordinaatti, X koordinaatti, Spritesheet joka kyseessä)
+    //Pelin spritet. Koko (pikseleitä X * X), Y koordinaatti, X koordinaatti, Spritesheet josta tekstuuri haetaan
     public static Sprite sand = new Sprite(16, 0, 0, SpriteSheet.tiles);
     public static Sprite concrete = new Sprite(16, 1, 0, SpriteSheet.tiles);
     public static Sprite sandCactus = new Sprite(16, 2, 0, SpriteSheet.tiles);
     public static Sprite sandRock = new Sprite(16, 3, 0, SpriteSheet.tiles);
     
-    public static Sprite voidSprite = new Sprite(16, 0x1B87E0);
+    public static Sprite voidSprite = new Sprite(16, 0xFFF770FF);
     
+    
+    //Pelaaja-spritet
     public static Sprite player_front = new Sprite(32, 0, 5, SpriteSheet.tiles);
     public static Sprite player_back = new Sprite(32, 0, 6, SpriteSheet.tiles);
     public static Sprite player_left = new Sprite(32, 2, 4, SpriteSheet.tiles);
@@ -35,6 +37,9 @@ public class Sprite {
     
     public static Sprite player_right_1 = new Sprite(32, 4, 7, SpriteSheet.tiles);
     public static Sprite player_right_2 = new Sprite(32, 6, 7, SpriteSheet.tiles);
+    
+    //Ammus-spritet
+    public static Sprite revolverBullet = new Sprite(32, 0, 5, SpriteSheet.tiles); //Tällä hetkellä placeholderina hiekkaa!
 
     //Konstruktori
     public Sprite(int size, int x, int y, SpriteSheet sheet) {

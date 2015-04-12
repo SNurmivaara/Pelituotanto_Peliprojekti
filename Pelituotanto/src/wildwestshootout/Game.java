@@ -11,25 +11,27 @@ import javax.swing.JFrame;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.input.Keyboard;
+import wildwestshootout.input.Mouse;
 import wildwestshootout.level.FirstLevel;
 import wildwestshootout.level.Level;
 import wildwestshootout.level.RandomLevel;
+import wildwestshootout.level.TileCoordinate;
 
 /**
  *
  * @author Sami
  */
 public class Game extends Canvas implements Runnable {
-    
+    private static final long serialVersionUID = 1L;
     
     //Pelin resoluutio (leveys)
-    public static int width = 300;
+    private static int width = 300;
     
     //Pelin resoluutio (korkeus) joka on leveys / aspect ratio (tällä hetkellä aspect ratio 16:9
-    public static int height = width / 16 * 9;
+    private static int height = width / 16 * 9;
     
     //Pelin pikseleiden skaalaus kolminkertaiseksi
-    public static int scale = 3;
+    private static int scale = 3;
     public static String title = "Wild West Shootout!";
     
     //Thread, JFrame, Keyboard, Level kutsu
@@ -51,8 +53,16 @@ public class Game extends Canvas implements Runnable {
     private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
     
     
-    //Pelin konstruktori
+    public static int getWindowWidth() {
+        return width * scale;
+    }
     
+    public static int getWindowHeight() {
+        return height * scale;
+    }
+    
+    
+    //Pelin konstruktori
     public Game() {
         Dimension size = new Dimension(width * scale, height * scale);
         setPreferredSize(size);
@@ -60,10 +70,15 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
-        level = new FirstLevel("/textures/FirstLevel.png");
-        player = new Player(0, 0, key);
-        
+        level = new FirstLevel("/levels/FirstLevel.png");
+        TileCoordinate playerSpawn = new TileCoordinate(2, 2);
+        player = new Player(playerSpawn.x(), playerSpawn.y(), key);
+        player.init(level);
         addKeyListener(key);
+        
+        Mouse mouse = new Mouse();
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
     }
     
     
@@ -131,6 +146,7 @@ public class Game extends Canvas implements Runnable {
     public void update() {
         key.update();
         player.update();
+        level.update();
     }
     
     

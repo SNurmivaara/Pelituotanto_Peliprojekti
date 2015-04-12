@@ -1,6 +1,10 @@
 package wildwestshootout.entity.mob;
 
+import java.util.ArrayList;
+import java.util.List;
+import wildwestshootout.entity.BulletProjectile;
 import wildwestshootout.entity.Entity;
+import wildwestshootout.entity.Projectile;
 import wildwestshootout.graphics.Sprite;
 
 /**
@@ -12,8 +16,17 @@ public abstract class Mob extends Entity {
     protected Sprite sprite;
     protected int direction = 0;
     protected boolean moving = false;
+    
+    protected List<Projectile> projectiles = new ArrayList<>();
 
     public void move(int xa, int ya) {
+        //Jos liikutaan kahdella akselilla, suoritetaan kaksi move() metodia
+        if (xa != 0 && ya != 0) {
+            move(xa, 0);
+            move(0, ya);
+            return;
+        }
+        
         //vasen
         if (xa > 0) {
             this.direction = 1;
@@ -31,7 +44,8 @@ public abstract class Mob extends Entity {
             this.direction = 0;
         }
 
-        if (!collision()) {
+        //Liikutaan jos hahmo ei osu mihinkään liikkuessaan
+        if (!collision(xa, ya)) {
             x += xa;
             y += ya;
         }
@@ -39,11 +53,24 @@ public abstract class Mob extends Entity {
 
     @Override
     public void update() {
-
+    }
+    
+    protected void shoot(int x, int y, double direction) {
+        Projectile projectile = new BulletProjectile(x, y, direction);
+        projectiles.add(projectile);
+        level.add(projectile);
     }
 
-    private boolean collision() {
-        return false;
+    private boolean collision(int xa, int ya) {
+        boolean solid = false;
+        for (int c = 0; c < 4; c++) {
+            int xt = ((x + xa) + c % 2 * 14 - 8) / 16;
+            int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
+            if (level.getTile(xt, yt).solid()) {
+                solid = true;
+            }
+        }
+        return solid;
     }
 
     public void render() {

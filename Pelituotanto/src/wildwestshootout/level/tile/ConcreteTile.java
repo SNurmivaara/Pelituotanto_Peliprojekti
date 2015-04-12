@@ -1,4 +1,4 @@
-package wildwestshootout.level.tile;
+ package wildwestshootout.level.tile;
 
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;

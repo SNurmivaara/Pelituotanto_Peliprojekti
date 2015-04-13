@@ -8,6 +8,7 @@ public class Sprite {
 
     public final int SIZE;
     private int x, y;
+    private int width, height;
     public int[] pixels;
     private SpriteSheet sheet;
 
@@ -41,9 +42,11 @@ public class Sprite {
     //Ammus-spritet
     public static Sprite musketBullet = new Sprite(16, 0, 0, SpriteSheet.projectile_musket);
 
-    //Konstruktori
+    //Konstruktorit
     public Sprite(int size, int x, int y, SpriteSheet sheet) {
         this.SIZE = size;
+        this.width = size;
+        this.height = size;
         this.pixels = new int[SIZE * SIZE];
         this.x = x * size;
         this.y = y * size;
@@ -51,18 +54,35 @@ public class Sprite {
         load();
     }
     
-    //Vaihtoehtoinen konstruktori
     public Sprite(int size, int color) {
         this.SIZE = size;
+        this.width = size;
+        this.height = size;
         this.pixels = new int[this.SIZE * this.SIZE];
+        setColor(color);
+    }
+    
+    public Sprite(int width, int height, int color) {
+        SIZE = -1;
+        this.width = width;
+        this.height = height;
+        pixels = new int[width * height];
         setColor(color);
     }
 
     //Värin asettaminen
     private void setColor(int color) {
-        for (int i = 0; i < this.SIZE * this.SIZE; i++) {
+        for (int i = 0; i < width * height; i++) {
             this.pixels[i] = color;
         }
+    }
+    
+    public int getWidth() {
+        return width;
+    }
+    
+    public int getHeight() {
+        return height;
     }
 
     //load() metodi joka lataa tietyt pikselit (tietyn Spriten määritellystä SpriteSheet:istä

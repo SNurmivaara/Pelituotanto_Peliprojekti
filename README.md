@@ -4,11 +4,9 @@ Pelituotannon peliprojekti
 
 TO-DO LIST
 ==============================
-- Kartat
+- GRAFIIKAT
+-   Kartta
+-   Pelaaja
+-   Animaatiot
+ 
 - (tekoäly?)
-- pelaajat
-- liikkuminen
-- animaatiot
-- collision detection
-- hiiri-input
-- projektiilit

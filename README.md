@@ -4,9 +4,12 @@ Pelituotannon peliprojekti
 
 TO-DO LIST
 ==============================
-- GRAFIIKAT
--   Kartta
--   Pelaaja
--   Animaatiot
+GRAFIIKAT
+___________________
+- Kartta
+- Pelaaja
+- Animaatiot
  
+GAMEPLAY
+___________________
 - (tekoäly?)

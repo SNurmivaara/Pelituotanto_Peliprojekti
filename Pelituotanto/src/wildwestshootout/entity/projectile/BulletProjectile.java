@@ -1,6 +1,6 @@
 package wildwestshootout.entity.projectile;
 
-import wildwestshootout.entity.particle.Particle;
+import wildwestshootout.entity.spawner.ParticleSpawner;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
 
@@ -26,8 +26,7 @@ public class BulletProjectile extends Projectile {
     @Override
     public void update() {
         if (level.tileCollision(x, y, nx, ny, 7)) {
-            Particle p = new Particle((int) x, (int) y, 50);
-            level.add(p);
+            level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
             remove();
         }
         move();

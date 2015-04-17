@@ -2,9 +2,10 @@ package wildwestshootout.entity.mob;
 
 import java.util.ArrayList;
 import java.util.List;
-import wildwestshootout.entity.BulletProjectile;
+import wildwestshootout.entity.projectile.BulletProjectile;
 import wildwestshootout.entity.Entity;
-import wildwestshootout.entity.Projectile;
+import wildwestshootout.entity.particle.Particle;
+import wildwestshootout.entity.projectile.Projectile;
 import wildwestshootout.graphics.Sprite;
 
 /**
@@ -57,7 +58,7 @@ public abstract class Mob extends Entity {
     
     protected void shoot(int x, int y, double direction) {
         Projectile projectile = new BulletProjectile(x, y, direction);
-        level.addProjectile(projectile);
+        level.add(projectile);
     }
 
     private boolean collision(int xa, int ya) {

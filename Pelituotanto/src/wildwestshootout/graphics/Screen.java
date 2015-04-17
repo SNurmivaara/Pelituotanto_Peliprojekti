@@ -1,7 +1,7 @@
 package wildwestshootout.graphics;
 
 import java.util.Random;
-import wildwestshootout.entity.Projectile;
+import wildwestshootout.entity.projectile.Projectile;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.level.tile.Tile;
 
@@ -129,7 +129,7 @@ public class Screen {
                 if (xa < 0 || xa >= width || ya < 0 || ya >= height) {
                     continue;
                 }
-                pixels[x + y * width] = sprite.pixels[x + y * sprite.getWidth()];
+                pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getWidth()];
             }
         }
     }

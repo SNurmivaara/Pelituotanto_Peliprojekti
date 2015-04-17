@@ -1,5 +1,6 @@
-package wildwestshootout.entity;
+package wildwestshootout.entity.projectile;
 
+import wildwestshootout.entity.Entity;
 import wildwestshootout.graphics.Sprite;
 
 /**

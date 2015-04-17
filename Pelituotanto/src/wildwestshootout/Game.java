@@ -1,7 +1,6 @@
 package wildwestshootout;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -14,7 +13,6 @@ import wildwestshootout.input.Keyboard;
 import wildwestshootout.input.Mouse;
 import wildwestshootout.level.FirstLevel;
 import wildwestshootout.level.Level;
-import wildwestshootout.level.RandomLevel;
 import wildwestshootout.level.TileCoordinate;
 
 /**

@@ -1,8 +1,8 @@
 package wildwestshootout.entity.mob;
 
 import wildwestshootout.Game;
-import wildwestshootout.entity.BulletProjectile;
-import wildwestshootout.entity.Projectile;
+import wildwestshootout.entity.projectile.BulletProjectile;
+import wildwestshootout.entity.projectile.Projectile;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
 import wildwestshootout.input.Keyboard;

@@ -41,6 +41,9 @@ public class Sprite {
     
     //Ammus-spritet
     public static Sprite musketBullet = new Sprite(16, 0, 0, SpriteSheet.projectile_musket);
+    
+    //Partikkelit
+    public static Sprite particle_normal = new Sprite(3, 0xAAAAAA);
 
     //Konstruktorit
     public Sprite(int size, int x, int y, SpriteSheet sheet) {

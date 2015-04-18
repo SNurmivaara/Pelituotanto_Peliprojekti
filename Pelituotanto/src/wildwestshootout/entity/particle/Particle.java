@@ -52,14 +52,43 @@ public class Particle extends Entity {
             ya *= 0.4;
         }
         
-        this.xx += xa;
-        this.yy += ya;
-        this.zz += za;
+        move(xx + xa, (yy + ya) + (zz + za));
     }
 
     @Override
     public void render(Screen screen) {
         screen.renderSprite((int) xx, (int) yy - (int) zz, sprite, true);
+    }
+
+    private void move(double x, double y) {
+        if (collision(x, y)) {
+            this.xa *= -0.5;
+            this.ya *= -0.5;
+            this.za *= -0.5;
+        }
+        this.xx += xa;
+        this.yy += ya;
+        this.zz += za;
+    }
+    
+    public boolean collision(double x, double y) {
+        boolean solid = false;
+        for (int c = 0; c < 4; c++) {
+            double xt = (x - c % 2 * 16) / 16;
+            double yt = (y - c / 2 * 16) / 16;
+            int ix = (int) Math.ceil(xt);
+            int iy = (int) Math.ceil(yt);
+            if (c % 2 == 0) {
+                ix = (int) Math.floor(xt);
+            }
+            if (c / 2 == 0) {
+                iy = (int) Math.floor(yt);
+            }
+            if (level.getTile(ix, iy).solid()) {
+                solid = true;
+            }
+        }
+        return solid;
     }
 
 }

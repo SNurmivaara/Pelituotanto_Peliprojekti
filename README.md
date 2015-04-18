@@ -6,10 +6,13 @@ TO-DO LIST
 ==============================
 GRAFIIKAT
 ___________________
-- Kartta
-- Pelaaja
-- Animaatiot
- 
+- Animaatioiden hiominen ja parantaminen
+- UUDET GRAFIIKAT (tiedostot)
+- UUSI KARTTA(/karttoja)
+- mob/npc luokka
+- Oman fontin lisääminen peliin
+
 GAMEPLAY
 ___________________
-- (tekoäly?)
+- tekoäly
+- Yleistä parantelua

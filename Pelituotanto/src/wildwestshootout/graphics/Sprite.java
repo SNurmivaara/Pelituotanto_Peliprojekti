@@ -10,7 +10,7 @@ public class Sprite {
     private int x, y;
     private int width, height;
     public int[] pixels;
-    private SpriteSheet sheet;
+    protected SpriteSheet sheet;
 
     //Pelin spritet. Koko (pikseleitä X * X), Y koordinaatti, X koordinaatti, Spritesheet josta tekstuuri haetaan
     public static Sprite sand = new Sprite(16, 0, 0, SpriteSheet.tiles);
@@ -46,6 +46,13 @@ public class Sprite {
     public static Sprite particle_normal = new Sprite(2, 0xAAAAAA);
 
     //Konstruktorit
+    protected Sprite(SpriteSheet sheet, int width, int height) {
+        SIZE = (width == height) ? width : -1;
+        this.width = width;
+        this.height = height;
+        this.sheet = sheet;
+    }
+    
     public Sprite(int size, int x, int y, SpriteSheet sheet) {
         this.SIZE = size;
         this.width = size;
@@ -71,6 +78,13 @@ public class Sprite {
         this.height = height;
         pixels = new int[width * height];
         setColor(color);
+    }
+    
+    public Sprite(int[] pixels, int width, int height) {
+        SIZE = (width == height) ? width : -1;
+        this.width = width;
+        this.height = height;
+        this.pixels = pixels;
     }
 
     //Värin asettaminen

@@ -3,8 +3,10 @@ package wildwestshootout.entity.mob;
 import wildwestshootout.Game;
 import wildwestshootout.entity.projectile.BulletProjectile;
 import wildwestshootout.entity.projectile.Projectile;
+import wildwestshootout.graphics.AnimatedSprite;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
+import wildwestshootout.graphics.SpriteSheet;
 import wildwestshootout.input.Keyboard;
 import wildwestshootout.input.Mouse;
 
@@ -18,7 +20,8 @@ public class Player extends Mob {
     private Sprite sprite;
     private int animation = 0;
     private boolean walking = false;
-    
+    private AnimatedSprite test = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 8);
+
     Projectile p;
     private int reloadSpeed = 0;
 
@@ -36,6 +39,7 @@ public class Player extends Mob {
 
     @Override
     public void update() {
+        test.update();
         if (reloadSpeed > 0) {
             reloadSpeed--;
         }
@@ -113,6 +117,7 @@ public class Player extends Mob {
             }
         }
 
+        sprite = test.getSprite();
         screen.renderDoubleTile(x - 16, y - 16, sprite);
     }
 

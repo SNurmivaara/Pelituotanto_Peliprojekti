@@ -9,6 +9,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.graphics.Screen;
+import wildwestshootout.graphics.SpriteSheet;
 import wildwestshootout.input.Keyboard;
 import wildwestshootout.input.Mouse;
 import wildwestshootout.level.FirstLevel;
@@ -163,6 +164,7 @@ public class Game extends Canvas implements Runnable {
         int yScroll = player.y - screen.height / 2;
         level.render(xScroll, yScroll, this.screen);
         player.render(screen);
+        screen.renderSheet(40, 40, SpriteSheet.player_right, false);
         
         //Kopioidaan pixels[] muuttujan arvot screen.pixels[] muuttujaan
         for (int i = 0; i < pixels.length; i++) {

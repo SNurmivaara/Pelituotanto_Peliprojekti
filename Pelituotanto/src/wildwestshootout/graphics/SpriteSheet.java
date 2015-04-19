@@ -1,3 +1,19 @@
+/* 
+ * Copyright (C) 2015 Sami Nurmivaara
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package wildwestshootout.graphics;
 
 import java.awt.image.BufferedImage;
@@ -8,7 +24,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Sami
+ * @author Sami nurmivaara
  */
 public class SpriteSheet {
 
@@ -25,6 +41,9 @@ public class SpriteSheet {
     public static SpriteSheet projectile_musket = new SpriteSheet("/textures/sheets/projectiles/projectile_musket.png", 48);
     public static SpriteSheet player = new SpriteSheet("/textures/sheets/player/player_sheet.png", 256, 128);
     public static SpriteSheet player_right = new SpriteSheet(player, 0, 0, 8, 1, 32);
+    public static SpriteSheet player_left = new SpriteSheet(player, 0, 3, 8, 1, 32);
+    public static SpriteSheet player_up = new SpriteSheet(player, 0, 2, 8, 1, 32);
+    public static SpriteSheet player_down = new SpriteSheet(player, 0, 1, 8, 1, 32);
 
     private Sprite[] sprites;
 

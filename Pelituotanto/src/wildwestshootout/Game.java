@@ -1,3 +1,19 @@
+/* 
+ * Copyright (C) 2015 Sami Nurmivaara
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package wildwestshootout;
 
 import java.awt.Canvas;
@@ -18,7 +34,7 @@ import wildwestshootout.level.TileCoordinate;
 
 /**
  *
- * @author Sami Nurmivaara
+ * @author Sami nurmivaara Nurmivaara
  */
 public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
@@ -164,7 +180,7 @@ public class Game extends Canvas implements Runnable {
         int yScroll = player.y - screen.height / 2;
         level.render(xScroll, yScroll, this.screen);
         player.render(screen);
-        screen.renderSheet(40, 40, SpriteSheet.player_right, false);
+        //screen.renderSheet(40, 40, SpriteSheet.player_right, false);
         
         //Kopioidaan pixels[] muuttujan arvot screen.pixels[] muuttujaan
         for (int i = 0; i < pixels.length; i++) {

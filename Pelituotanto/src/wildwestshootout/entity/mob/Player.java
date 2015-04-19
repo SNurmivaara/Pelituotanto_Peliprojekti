@@ -1,3 +1,19 @@
+/* 
+ * Copyright (C) 2015 Sami Nurmivaara
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package wildwestshootout.entity.mob;
 
 import wildwestshootout.Game;
@@ -12,7 +28,7 @@ import wildwestshootout.input.Mouse;
 
 /**
  *
- * @author Sami
+ * @author Sami nurmivaara
  */
 public class Player extends Mob {
 
@@ -20,7 +36,12 @@ public class Player extends Mob {
     private Sprite sprite;
     private int animation = 0;
     private boolean walking = false;
-    private AnimatedSprite test = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 8);
+    private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 8);
+    private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 8);
+    private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 8);
+    private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 8);
+    
+    private AnimatedSprite animSprite = down;
 
     Projectile p;
     private int reloadSpeed = 0;
@@ -39,7 +60,11 @@ public class Player extends Mob {
 
     @Override
     public void update() {
-        test.update();
+        if (walking) {
+            animSprite.update();
+        } else {
+            animSprite.setFrame(0);
+        }
         if (reloadSpeed > 0) {
             reloadSpeed--;
         }
@@ -53,15 +78,17 @@ public class Player extends Mob {
 
         if (input.up) {
             ya--;
-        }
-        if (input.down) {
+            animSprite = up;
+        } else if (input.down) {
             ya++;
+            animSprite = down;
         }
         if (input.left) {
             xa--;
-        }
-        if (input.right) {
+            animSprite = left;
+        } else if (input.right) {
             xa++;
+            animSprite = right;
         }
         if (xa != 0 || ya != 0) {
             move(xa, ya);
@@ -75,7 +102,7 @@ public class Player extends Mob {
 
     @Override
     public void render(Screen screen) {
-
+/*
         if (direction == 0) {
             sprite = Sprite.player_back;
             if (walking) {
@@ -116,8 +143,8 @@ public class Player extends Mob {
                 }
             }
         }
-
-        sprite = test.getSprite();
+*/
+        sprite = animSprite.getSprite();
         screen.renderDoubleTile(x - 16, y - 16, sprite);
     }
 

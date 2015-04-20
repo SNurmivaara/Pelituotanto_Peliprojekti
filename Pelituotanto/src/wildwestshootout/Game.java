@@ -25,7 +25,6 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.graphics.Screen;
-import wildwestshootout.graphics.SpriteSheet;
 import wildwestshootout.input.Keyboard;
 import wildwestshootout.input.Mouse;
 import wildwestshootout.level.FirstLevel;
@@ -193,9 +192,7 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
     }
-    //muutos
-    //Pelin päämetodi
-    /*
+    
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
@@ -208,6 +205,5 @@ public class Game extends Canvas implements Runnable {
         
         game.start();
     }
-    */
     
 }

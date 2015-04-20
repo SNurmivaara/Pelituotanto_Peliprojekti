@@ -43,7 +43,7 @@ public class FirstLevel extends Level {
             e.printStackTrace();
             System.out.println("Virhe! Ei pystytty ladata level-tiedostoa!");
         }
-        add(new Civilian(5, 5));
+        add(new Civilian(35, 35));
     }
 
     @Override

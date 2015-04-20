@@ -136,7 +136,9 @@ public class Level {
         }
 
         /**
-         * Hiekka = 0xFFFFFF00 Betoni = 0xFF808080 Kaktus hiekalla = 0xFFAAD800
+         * Hiekka = 0xFFFFFF00 
+         * Betoni = 0xFF808080 
+         * Kaktus hiekalla = 0xFFAAD800
          * Kivi hiekalla = 0xFFCEAC00
          */
         if (tiles[x + y * width] == Tile.col_sand) {

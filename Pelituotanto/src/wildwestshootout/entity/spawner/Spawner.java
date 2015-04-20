@@ -24,7 +24,7 @@ import wildwestshootout.level.Level;
  *
  * @author Sami nurmivaara
  */
-public class Spawner extends Entity {
+public abstract class Spawner extends Entity {
     
     public enum Type {
         MOB, PARTICLE;

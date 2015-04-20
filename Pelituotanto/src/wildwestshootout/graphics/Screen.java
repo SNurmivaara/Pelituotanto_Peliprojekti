@@ -108,7 +108,7 @@ public class Screen {
         }
     }
 
-    public void renderDoubleTile(int xp, int yp, Sprite sprite) {
+    public void renderMob(int xp, int yp, Sprite sprite) {
         xp -= this.xOffset;
         yp -= this.yOffset;
         for (int y = 0; y < 32; y++) {

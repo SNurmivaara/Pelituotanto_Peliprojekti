@@ -24,14 +24,15 @@ import wildwestshootout.level.Level;
  *
  * @author Sami nurmivaara Nurmivaara
  */
-public abstract class Entity {
+public class Entity {
     
     public int x, y;
     private boolean removed = false;
     protected Level level;
     protected final Random random = new Random();
     
-    public void update() {
+    public void update(){
+        
     }
     
     public void render(Screen screen) {

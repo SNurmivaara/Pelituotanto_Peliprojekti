@@ -16,12 +16,10 @@
  */
 package wildwestshootout.entity.mob;
 
-import java.util.ArrayList;
-import java.util.List;
 import wildwestshootout.entity.projectile.BulletProjectile;
 import wildwestshootout.entity.Entity;
-import wildwestshootout.entity.particle.Particle;
 import wildwestshootout.entity.projectile.Projectile;
+import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
 
 /**
@@ -31,9 +29,14 @@ import wildwestshootout.graphics.Sprite;
 public abstract class Mob extends Entity {
 
     protected Sprite sprite;
-    protected int direction = 0;
     protected boolean moving = false;
     protected boolean walking = false;
+
+    protected enum Direction {
+        UP, DOWN, LEFT, RIGHT
+    }
+    
+    protected Direction direction;
 
     public void move(int xa, int ya) {
         //Jos liikutaan kahdella akselilla, suoritetaan kaksi move() metodia
@@ -42,22 +45,22 @@ public abstract class Mob extends Entity {
             move(0, ya);
             return;
         }
-        
+
         //vasen
         if (xa > 0) {
-            this.direction = 1;
+            this.direction = Direction.LEFT;
         }
         //oikea
         if (xa < 0) {
-            this.direction = 3;
+            this.direction = Direction.RIGHT;
         }
         //ylös
         if (ya > 0) {
-            this.direction = 2;
+            this.direction = Direction.UP;
         }
         //alas
         if (ya < 0) {
-            this.direction = 0;
+            this.direction = Direction.DOWN;
         }
 
         //Liikutaan jos hahmo ei osu mihinkään liikkuessaan
@@ -68,10 +71,11 @@ public abstract class Mob extends Entity {
     }
 
     @Override
-    public void update() {
-        
-    }
-    
+    public abstract void update();
+
+    @Override
+    public abstract void render(Screen screen);
+
     protected void shoot(int x, int y, double direction) {
         Projectile projectile = new BulletProjectile(x, y, direction);
         level.add(projectile);
@@ -87,9 +91,6 @@ public abstract class Mob extends Entity {
             }
         }
         return solid;
-    }
-
-    public void render() {
     }
 
 }

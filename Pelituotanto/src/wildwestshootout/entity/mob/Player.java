@@ -70,12 +70,6 @@ public class Player extends Mob {
         }
         int xa = 0, ya = 0;
 
-        if (animation < 7500) {
-            animation++;
-        } else {
-            animation = 0;
-        }
-
         if (input.up) {
             ya--;
             animSprite = up;
@@ -102,50 +96,8 @@ public class Player extends Mob {
 
     @Override
     public void render(Screen screen) {
-/*
-        if (direction == 0) {
-            sprite = Sprite.player_back;
-            if (walking) {
-                if (animation % 20 > 10) {
-                    sprite = Sprite.player_back_1;
-                } else {
-                    sprite = Sprite.player_back_2;
-                }
-            }
-        }
-        if (direction == 1) {
-            sprite = Sprite.player_left;
-            if (walking) {
-                if (animation % 20 > 10) {
-                    sprite = Sprite.player_left_1;
-                } else {
-                    sprite = Sprite.player_left_2;
-                }
-            }
-        }
-        if (direction == 2) {
-            sprite = Sprite.player_front;
-            if (walking) {
-                if (animation % 20 > 10) {
-                    sprite = Sprite.player_front_1;
-                } else {
-                    sprite = Sprite.player_front_2;
-                }
-            }
-        }
-        if (direction == 3) {
-            sprite = Sprite.player_right;
-            if (walking) {
-                if (animation % 20 > 10) {
-                    sprite = Sprite.player_right_1;
-                } else {
-                    sprite = Sprite.player_right_2;
-                }
-            }
-        }
-*/
         sprite = animSprite.getSprite();
-        screen.renderDoubleTile(x - 16, y - 16, sprite);
+        screen.renderMob(x - 16, y - 16, sprite);
     }
 
     private void updateShooting() {

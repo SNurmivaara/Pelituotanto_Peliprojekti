@@ -23,6 +23,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
+import wildwestshootout.entity.mob.Civilian;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.input.Keyboard;

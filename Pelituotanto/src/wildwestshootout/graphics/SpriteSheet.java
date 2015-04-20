@@ -39,12 +39,21 @@ public class SpriteSheet {
     //Ladataan mahdolliset Sprite -taulukot (sijainti, koko)
     public static SpriteSheet tiles = new SpriteSheet("/textures/sheets/spritesheet.png", 256);
     public static SpriteSheet projectile_musket = new SpriteSheet("/textures/sheets/projectiles/projectile_musket.png", 48);
+    
+    //Pelaajan tekstuurit
     public static SpriteSheet player = new SpriteSheet("/textures/sheets/player/player_sheet.png", 256, 128);
     public static SpriteSheet player_right = new SpriteSheet(player, 0, 0, 8, 1, 32);
     public static SpriteSheet player_left = new SpriteSheet(player, 0, 3, 8, 1, 32);
     public static SpriteSheet player_up = new SpriteSheet(player, 0, 2, 8, 1, 32);
     public static SpriteSheet player_down = new SpriteSheet(player, 0, 1, 8, 1, 32);
 
+    //Siviilin tekstuurit
+    public static SpriteSheet civilian = new SpriteSheet("/textures/sheets/mobs/civilian_sheet.png",256, 128);
+    public static SpriteSheet civilian_right = new SpriteSheet(civilian, 0, 0, 8, 1, 32);
+    public static SpriteSheet civilian_left = new SpriteSheet(civilian, 0, 3, 8, 1, 32);
+    public static SpriteSheet civilian_up = new SpriteSheet(civilian, 0, 2, 8, 1, 32);
+    public static SpriteSheet civilian_down = new SpriteSheet(civilian, 0, 1, 8, 1, 32);
+    
     private Sprite[] sprites;
 
     //Konstruktori jolle määritellään tiedoston polku, koko sekä pikseli lista vastaamaan koko * koko

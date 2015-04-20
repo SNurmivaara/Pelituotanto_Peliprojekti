@@ -4,15 +4,18 @@ Pelituotannon peliprojekti
 
 TO-DO LIST
 ==============================
-GRAFIIKAT
+TEKSTUURIT
 ___________________
-- Animaatioiden hiominen ja parantaminen
-- UUDET GRAFIIKAT (tiedostot)
-- UUSI KARTTA(/karttoja)
-- mob/npc luokka
-- Oman fontin lisääminen peliin
+- Uudet pelimaailman grafiikat
+- Uusi kartta
+- Uusi pelaaja (+animaatiot)
+- Uusi NPC (+animaatiot)
+
+
+
+- (Oman fontin lisääminen peliin)
 
 GAMEPLAY
-___________________
-- tekoäly
-- Yleistä parantelua
+==============================
+- Agressiivinen NPC
+- (Pathfinding)

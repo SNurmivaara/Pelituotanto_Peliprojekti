@@ -86,7 +86,7 @@ public class Game extends Canvas implements Runnable {
         frame = new JFrame();
         key = new Keyboard();
         level = new FirstLevel("/levels/FirstLevel.png");
-        TileCoordinate playerSpawn = new TileCoordinate(2, 2);
+        TileCoordinate playerSpawn = new TileCoordinate(31, 31);
         player = new Player(playerSpawn.x(), playerSpawn.y(), key);
         player.init(level);
         addKeyListener(key);

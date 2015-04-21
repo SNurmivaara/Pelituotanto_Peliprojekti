@@ -34,6 +34,8 @@ public class Chaser extends Mob {
     private AnimatedSprite down = new AnimatedSprite(SpriteSheet.civilian_down, 32, 32, 8);
 
     private AnimatedSprite animSprite = down;
+    
+    private int time = 0;
 
     private int xa = 0;
     private int ya = 0;
@@ -48,8 +50,8 @@ public class Chaser extends Mob {
         xa = 0;
         ya = 0;
 
-        List<Player> players = level.getPlayers(this, 50);
-        Player player = players.get(0);
+        List<Player> players = level.getPlayers(this, 100);
+        Player player = level.getClientPlayer();
 
         if (players.size() > 0) {
             if (x < player.getX()) {
@@ -61,7 +63,7 @@ public class Chaser extends Mob {
             if (y < player.getY()) {
                 ya++;
             }
-            if (y < player.getY()) {
+            if (y > player.getY()) {
                 ya--;
             }
         }
@@ -76,6 +78,7 @@ public class Chaser extends Mob {
 
     @Override
     public void update() {
+        time++;
 
         move();
 

@@ -117,5 +117,15 @@ public class Player extends Mob {
             }
         }
     }
+    
+    @Override
+    public int getX() {
+        return this.x;
+    }
+    
+    @Override
+    public int getY() {
+        return this.y;
+    }
 
 }

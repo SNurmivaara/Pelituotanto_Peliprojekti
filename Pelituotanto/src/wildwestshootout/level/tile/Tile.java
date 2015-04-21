@@ -33,6 +33,12 @@ public class Tile {
     public static Tile sandCactus = new SandCactusTile(Sprite.sandCactus);
     public static Tile sandRock = new SandRockTile(Sprite.sandRock);
     public static Tile musketBullet = new SandRockTile(Sprite.musketBullet);
+    public static Tile fenceVertical = new FenceVerticalTile(Sprite.fenceVertical);
+    public static Tile fenceHorizontal = new FenceHorizontalTile(Sprite.fenceHorizontal);
+    public static Tile fenceSE = new FenceSETile(Sprite.fenceSE);
+    public static Tile fenceSW = new FenceSWTile(Sprite.fenceSW);
+    public static Tile fenceNW = new FenceNWTile(Sprite.fenceNW);
+    public static Tile fenceNE = new FenceNETile(Sprite.fenceNE);
     public static Tile voidTile = new VoidTile(Sprite.voidSprite);
     
     
@@ -46,6 +52,12 @@ public class Tile {
     public static final int col_concrete = 0xFF808080;
     public static final int col_sandCactus = 0xFFAAD800;
     public static final int col_sandRock = 0xFFCEAC00;
+    public static final int col_fenceVertical = 0xFF702C00;
+    public static final int col_fenceHorizontal = 0xFF702C01;
+    public static final int col_fenceSE = 0xFF702C02;
+    public static final int col_fenceSW = 0xFF702C03;
+    public static final int col_fenceNW = 0xFF702C04;
+    public static final int col_fenceNE = 0xFF702C05;
     
 
     public Tile(Sprite sprite) {

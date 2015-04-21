@@ -33,6 +33,12 @@ public class Sprite {
     public static Sprite concrete = new Sprite(16, 1, 0, SpriteSheet.tiles);
     public static Sprite sandCactus = new Sprite(16, 2, 0, SpriteSheet.tiles);
     public static Sprite sandRock = new Sprite(16, 3, 0, SpriteSheet.tiles);
+    public static Sprite fenceVertical = new Sprite(16, 4, 0, SpriteSheet.tiles);
+    public static Sprite fenceHorizontal = new Sprite(16, 5, 0, SpriteSheet.tiles);
+    public static Sprite fenceSE = new Sprite(16, 6, 0, SpriteSheet.tiles);
+    public static Sprite fenceSW = new Sprite(16, 7, 0, SpriteSheet.tiles);
+    public static Sprite fenceNW = new Sprite(16, 8, 0, SpriteSheet.tiles);
+    public static Sprite fenceNE = new Sprite(16, 9, 0, SpriteSheet.tiles);
     
     public static Sprite voidSprite = new Sprite(16, 0xFFF770FF);
     

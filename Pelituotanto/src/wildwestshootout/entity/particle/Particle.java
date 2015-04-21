@@ -34,7 +34,7 @@ public class Particle extends Entity {
     protected double xx, yy, zz;
     protected double xa, ya, za;
 
-    public Particle(int x, int y, int life) {
+    public Particle(double x, double y, int life) {
         this.x = x;
         this.y = y;
         this.xx = x;

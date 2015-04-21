@@ -174,9 +174,9 @@ public class Game extends Canvas implements Runnable {
         
         //Tyhjennetään ruutu ja sen jälkeen renderöidään uudestaan
         screen.clear();
-        int xScroll = player.getX() - screen.width / 2;
-        int yScroll = player.getY() - screen.height / 2;
-        level.render(xScroll, yScroll, this.screen);
+        double xScroll = player.getX() - screen.width / 2;
+        double yScroll = player.getY() - screen.height / 2;
+        level.render((int) xScroll, (int) yScroll, this.screen);
         //screen.renderSheet(40, 40, SpriteSheet.player_right, false);
         
         //Kopioidaan pixels[] muuttujan arvot screen.pixels[] muuttujaan

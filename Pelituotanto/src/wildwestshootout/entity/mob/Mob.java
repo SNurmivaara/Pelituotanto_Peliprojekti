@@ -20,7 +20,6 @@ import wildwestshootout.entity.projectile.BulletProjectile;
 import wildwestshootout.entity.Entity;
 import wildwestshootout.entity.projectile.Projectile;
 import wildwestshootout.graphics.Screen;
-import wildwestshootout.graphics.Sprite;
 
 /**
  *
@@ -30,14 +29,16 @@ public abstract class Mob extends Entity {
 
     protected boolean moving = false;
     protected boolean walking = false;
+    protected double speed = 1;
 
     protected enum Direction {
+
         UP, DOWN, LEFT, RIGHT
     }
-    
+
     protected Direction direction;
 
-    public void move(int xa, int ya) {
+    public void move(double xa, double ya) {
         //Jos liikutaan kahdella akselilla, suoritetaan kaksi move() metodia
         if (xa != 0 && ya != 0) {
             move(xa, 0);
@@ -63,10 +64,40 @@ public abstract class Mob extends Entity {
         }
 
         //Liikutaan jos hahmo ei osu mihinkään liikkuessaan
-        if (!collision(xa, ya)) {
-            x += xa;
-            y += ya;
+        while (xa != 0) {
+            if (Math.abs(xa) > 1) {
+                if (!collision(abs(xa), ya)) {
+                    this.x += abs(xa);
+                }
+                xa -= abs(xa);
+            } else {
+                if (!collision(abs(xa), ya)) {
+                    this.x += xa;
+                }
+                xa = 0;
+            }
         }
+        
+        while (ya != 0) {
+            if (Math.abs(ya) > 1) {
+                if (!collision(xa, abs(ya))) {
+                    this.y += abs(ya);
+                }
+                ya -= abs(ya);
+            } else {
+                if (!collision(xa, abs(ya))) {
+                    this.y += ya;
+                }
+                ya = 0;
+            }
+        }
+    }
+
+    private int abs(double value) {
+        if (value < 0) {
+            return -1;
+        }
+        return 1;
     }
 
     @Override
@@ -75,17 +106,25 @@ public abstract class Mob extends Entity {
     @Override
     public abstract void render(Screen screen);
 
-    protected void shoot(int x, int y, double direction) {
+    protected void shoot(double x, double y, double direction) {
         Projectile projectile = new BulletProjectile(x, y, direction);
         level.add(projectile);
     }
 
-    private boolean collision(int xa, int ya) {
+    private boolean collision(double xa, double ya) {
         boolean solid = false;
         for (int c = 0; c < 4; c++) {
-            int xt = ((x + xa) + c % 2 * 14 - 8) / 16;
-            int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
-            if (level.getTile(xt, yt).solid()) {
+            double xt = ((x + xa) - c % 2 * 16) / 16;
+            double yt = ((y + ya) - c / 2 * 16) / 16;
+            int ix = (int) Math.ceil(xt);
+            int iy = (int) Math.ceil(yt);
+            if (c % 2 == 0) {
+                ix = (int) Math.floor(xt);
+            }
+            if (c / 2 == 0) {
+                iy = (int) Math.floor(yt);
+            }
+            if (level.getTile(ix, iy).solid()) {
                 solid = true;
             }
         }

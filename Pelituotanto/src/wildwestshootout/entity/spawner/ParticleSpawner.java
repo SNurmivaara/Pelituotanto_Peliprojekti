@@ -31,7 +31,7 @@ public class ParticleSpawner extends Spawner {
         super(x, y, Type.PARTICLE, amount, level);
         this.life = life;
         for (int i = 0; i < amount; i++) {
-            level.add(new Particle(x, y, life));
+            level.add(new Particle((double) x,(double) y, life));
         }
     }
 

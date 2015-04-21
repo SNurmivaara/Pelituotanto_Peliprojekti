@@ -39,7 +39,7 @@ public class Player extends Mob {
     private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 8);
     private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 8);
     private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 8);
-    
+
     private AnimatedSprite animSprite = down;
 
     Projectile p;
@@ -51,6 +51,7 @@ public class Player extends Mob {
     }
 
     public Player(int x, int y, Keyboard input) {
+        this.speed = 1.2;
         this.x = x;
         this.y = y;
         this.input = input;
@@ -67,20 +68,20 @@ public class Player extends Mob {
         if (reloadSpeed > 0) {
             reloadSpeed--;
         }
-        int xa = 0, ya = 0;
+        double xa = 0, ya = 0;
 
         if (input.up) {
-            ya--;
+            ya -= speed;
             animSprite = up;
         } else if (input.down) {
-            ya++;
+            ya += speed;
             animSprite = down;
         }
         if (input.left) {
-            xa--;
+            xa -= speed;
             animSprite = left;
         } else if (input.right) {
-            xa++;
+            xa += speed;
             animSprite = right;
         }
         if (xa != 0 || ya != 0) {
@@ -96,7 +97,7 @@ public class Player extends Mob {
     @Override
     public void render(Screen screen) {
         sprite = animSprite.getSprite();
-        screen.renderMob(x - 16, y - 16, sprite);
+        screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
     }
 
     private void updateShooting() {
@@ -116,16 +117,6 @@ public class Player extends Mob {
                 level.getProjectiles().remove(i);
             }
         }
-    }
-    
-    @Override
-    public int getX() {
-        return this.x;
-    }
-    
-    @Override
-    public int getY() {
-        return this.y;
     }
 
 }

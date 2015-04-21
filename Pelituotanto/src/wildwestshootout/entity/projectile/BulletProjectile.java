@@ -28,7 +28,7 @@ public class BulletProjectile extends Projectile {
 
     public static final int RELOAD_SPEED = 15;
 
-    public BulletProjectile(int xOrigin, int yOrigin, double direction) {
+    public BulletProjectile(double xOrigin, double yOrigin, double direction) {
         super(xOrigin, yOrigin, direction);
         range = 200;
         speed = 3;
@@ -42,7 +42,7 @@ public class BulletProjectile extends Projectile {
     @Override
     public void update() {
         if (level.tileCollision((int)(x + nx),(int) (y + ny), 6, 5, 5)) {
-            level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
+            level.add(new ParticleSpawner((int) x,(int) y, 44, 50, level));
             remove();
         } 
         move();

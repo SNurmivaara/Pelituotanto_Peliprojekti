@@ -25,7 +25,7 @@ import wildwestshootout.graphics.Sprite;
  */
 public abstract class Projectile extends Entity {
     
-    protected final int xOrigin, yOrigin;
+    protected final double xOrigin, yOrigin;
     protected double angle;
     public Sprite sprite;
     protected double x, y;
@@ -33,7 +33,7 @@ public abstract class Projectile extends Entity {
     protected double distance;
     protected double speed, range, damage;
     
-    public Projectile(int xOrigin, int yOrigin, double direction) {
+    public Projectile(double xOrigin, double yOrigin, double direction) {
         this.xOrigin = xOrigin;
         this.yOrigin = yOrigin;
         this.angle = direction;

@@ -35,8 +35,8 @@ public class Civilian extends Mob {
     private AnimatedSprite animSprite = down;
 
     private int time = 0;
-    private int xa = 0;
-    private int ya = 0;
+    private double xa = 0;
+    private double ya = 0;
 
     public Civilian(int x, int y) {
         this.x = x << 4;
@@ -90,7 +90,7 @@ public class Civilian extends Mob {
     @Override
     public void render(Screen screen) {
         sprite = animSprite.getSprite();
-        screen.renderMob(x - 16, y - 16, sprite);
+        screen.renderMob((int) (x - 16),(int) (y - 16), sprite);
     }
 
 }

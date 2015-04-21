@@ -34,13 +34,14 @@ public class Chaser extends Mob {
     private AnimatedSprite down = new AnimatedSprite(SpriteSheet.civilian_down, 32, 32, 8);
 
     private AnimatedSprite animSprite = down;
-    
+
     private int time = 0;
 
-    private int xa = 0;
-    private int ya = 0;
+    private double xa = 0;
+    private double ya = 0;
 
     public Chaser(int x, int y) {
+        this.speed = 1;
         this.x = x << 4;
         this.y = y << 4;
         sprite = Sprite.civilian;
@@ -55,16 +56,16 @@ public class Chaser extends Mob {
 
         if (players.size() > 0) {
             if (x < player.getX()) {
-                xa++;
+                xa += speed;
             }
             if (x > player.getX()) {
-                xa--;
+                xa -= speed;
             }
             if (y < player.getY()) {
-                ya++;
+                ya += speed;
             }
             if (y > player.getY()) {
-                ya--;
+                ya -= speed;
             }
         }
 
@@ -109,7 +110,7 @@ public class Chaser extends Mob {
     @Override
     public void render(Screen screen) {
         sprite = animSprite.getSprite();
-        screen.renderMob(x - 16, y - 16, this);
+        screen.renderMob((int) (x - 16), (int) (y - 16), this);
     }
 
 }

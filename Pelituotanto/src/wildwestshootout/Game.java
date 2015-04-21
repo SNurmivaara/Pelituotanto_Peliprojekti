@@ -46,7 +46,7 @@ public class Game extends Canvas implements Runnable {
     
     //Pelin pikseleiden skaalaus kolminkertaiseksi
     private static int scale = 3;
-    public static String title = "Wild West Shootout! T:SAMI";
+    public static String title = "Wild West Shootout!";
     
     //Thread, JFrame, Keyboard, Level kutsu
     private Thread thread;

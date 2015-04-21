@@ -17,8 +17,9 @@
 package wildwestshootout.graphics;
 
 import java.util.Random;
+import wildwestshootout.entity.mob.Chaser;
+import wildwestshootout.entity.mob.Mob;
 import wildwestshootout.entity.projectile.Projectile;
-import wildwestshootout.entity.mob.Player;
 import wildwestshootout.level.tile.Tile;
 
 /**
@@ -124,6 +125,35 @@ public class Screen {
                 }
 
                 int col = sprite.pixels[x + y * 32];
+                if (col != 0xFFFF00FF) {
+                    pixels[xAbsolute + yAbsolute * width] = col;
+                }
+
+            }
+        }
+    }
+    
+    public void renderMob(int xp, int yp, Mob mob) {
+        xp -= this.xOffset;
+        yp -= this.yOffset;
+        for (int y = 0; y < 32; y++) {
+            int yAbsolute = y + yp;
+            for (int x = 0; x < 32; x++) {
+                int xAbsolute = x + xp;
+                if (xAbsolute < -32 || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) {
+                    break;
+                }
+
+                if (xAbsolute < 0) {
+                    xAbsolute = 0;
+                }
+                
+                
+
+                int col = mob.getSprite().pixels[x + y * 32];
+                if ((mob instanceof Chaser) && col == 0xFFFFFFFF) {
+                    col = 0xFFFF0010;
+                }
                 if (col != 0xFFFF00FF) {
                     pixels[xAbsolute + yAbsolute * width] = col;
                 }

@@ -16,6 +16,7 @@
  */
 package wildwestshootout.entity.mob;
 
+import java.util.List;
 import wildwestshootout.graphics.AnimatedSprite;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
@@ -25,7 +26,7 @@ import wildwestshootout.graphics.SpriteSheet;
  *
  * @author Sami Nurmivaara
  */
-public class Civilian extends Mob {
+public class Chaser extends Mob {
 
     private AnimatedSprite right = new AnimatedSprite(SpriteSheet.civilian_right, 32, 32, 8);
     private AnimatedSprite left = new AnimatedSprite(SpriteSheet.civilian_left, 32, 32, 8);
@@ -34,47 +35,35 @@ public class Civilian extends Mob {
 
     private AnimatedSprite animSprite = down;
 
-    private int time = 0;
     private int xa = 0;
     private int ya = 0;
 
-    public Civilian(int x, int y) {
+    public Chaser(int x, int y) {
         this.x = x << 4;
         this.y = y << 4;
         sprite = Sprite.civilian;
     }
 
-    @Override
-    public void update() {
-        time++;
+    private void move() {
+        xa = 0;
+        ya = 0;
 
-        if (time % (random.nextInt(50) + 30) == 0) {
-            xa = random.nextInt(3) - 1;
-            ya = random.nextInt(3) - 1;
-            if (random.nextInt(4) == 0) {
-                xa = 0;
-                ya = 0;
+        List<Player> players = level.getPlayers(this, 50);
+        Player player = players.get(0);
+
+        if (players.size() > 0) {
+            if (x < player.getX()) {
+                xa++;
             }
-        }
-
-        if (walking) {
-            animSprite.update();
-        } else {
-            animSprite.setFrame(0);
-        }
-        if (ya < 0) {
-            direction = Direction.UP;
-            animSprite = up;
-        } else if (ya > 0) {
-            direction = Direction.DOWN;
-            animSprite = down;
-        }
-        if (xa < 0) {
-            direction = Direction.LEFT;
-            animSprite = left;
-        } else if (xa > 0) {
-            direction = Direction.RIGHT;
-            animSprite = right;
+            if (x > player.getX()) {
+                xa--;
+            }
+            if (y < player.getY()) {
+                ya++;
+            }
+            if (y < player.getY()) {
+                ya--;
+            }
         }
 
         if (xa != 0 || ya != 0) {
@@ -83,6 +72,33 @@ public class Civilian extends Mob {
         } else {
             walking = false;
         }
+    }
+
+    @Override
+    public void update() {
+
+        move();
+
+        if (walking) {
+            animSprite.update();
+        } else {
+            animSprite.setFrame(0);
+        }
+
+        if (ya < 0) {
+            animSprite = up;
+            direction = Direction.UP;
+        } else if (ya > 0) {
+            animSprite = down;
+            direction = Direction.DOWN;
+        }
+        if (xa < 0) {
+            animSprite = left;
+            direction = Direction.LEFT;
+        } else if (xa > 0) {
+            animSprite = right;
+            direction = Direction.RIGHT;
+        }
 
         sprite = animSprite;
     }
@@ -90,7 +106,7 @@ public class Civilian extends Mob {
     @Override
     public void render(Screen screen) {
         sprite = animSprite.getSprite();
-        screen.renderMob(x - 16, y - 16, sprite);
+        screen.renderMob(x - 16, y - 16, this);
     }
 
 }

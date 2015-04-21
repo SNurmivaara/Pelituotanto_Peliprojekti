@@ -19,7 +19,7 @@ package wildwestshootout.level;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import wildwestshootout.entity.mob.Civilian;
+import wildwestshootout.entity.mob.Chaser;
 
 /**
  *
@@ -43,7 +43,10 @@ public class FirstLevel extends Level {
             e.printStackTrace();
             System.out.println("Virhe! Ei pystytty ladata level-tiedostoa!");
         }
-        add(new Civilian(35, 35));
+
+        for (int i = 0; i < 1; i++) {
+            add(new Chaser(35, 35));
+        }
     }
 
     @Override

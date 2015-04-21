@@ -19,6 +19,7 @@ package wildwestshootout.level;
 import java.util.ArrayList;
 import java.util.List;
 import wildwestshootout.entity.Entity;
+import wildwestshootout.entity.mob.Player;
 import wildwestshootout.entity.particle.Particle;
 import wildwestshootout.entity.projectile.Projectile;
 import wildwestshootout.graphics.Screen;
@@ -37,6 +38,7 @@ public class Level {
     private List<Entity> entities = new ArrayList<>();
     private List<Projectile> projectiles = new ArrayList<>();
     private List<Particle> particles = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
 
     public Level(int width, int height) {
         this.width = width;
@@ -66,9 +68,12 @@ public class Level {
         for (int i = 0; i < particles.size(); i++) {
             particles.get(i).update();
         }
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).update();
+        }
         remove();
     }
-    
+
     private void remove() {
         for (int i = 0; i < entities.size(); i++) {
             if (entities.get(i).isRemoved()) {
@@ -83,6 +88,11 @@ public class Level {
         for (int i = 0; i < particles.size(); i++) {
             if (particles.get(i).isRemoved()) {
                 particles.remove(i);
+            }
+        }
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).isRemoved()) {
+                players.remove(i);
             }
         }
     }
@@ -116,6 +126,9 @@ public class Level {
         for (int i = 0; i < particles.size(); i++) {
             particles.get(i).render(screen);
         }
+        for (int i = 0; i < players.size(); i++) {
+            players.get(i).render(screen);
+        }
     }
 
     public void add(Entity e) {
@@ -124,9 +137,68 @@ public class Level {
             particles.add((Particle) e);
         } else if (e instanceof Projectile) {
             projectiles.add((Projectile) e);
+        } else if (e instanceof Player) {
+            players.add((Player) e);
         } else {
             entities.add(e);
         }
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public Player getPlayerAt(int index) {
+        return players.get(index);
+    }
+
+    public Player getClientPlayer() {
+        return players.get(0);
+    }
+
+    public List<Entity> getEntities(Entity e, int radius) {
+        List<Entity> result = new ArrayList<>();
+        int ex = e.getX();
+        int ey = e.getY();
+        
+        for (int i = 0; i < entities.size(); i++) {
+            Entity entity = entities.get(i);
+            int x = entity.getX();
+            int y = entity.getY();
+            
+            int dx = Math.abs(x - ex);
+            int dy = Math.abs(y - ey);
+            
+            double distance = Math.sqrt((dx * dx) + (dy * dy));
+            
+            if(distance <= radius) {
+                result.add(entity);
+            }
+        }
+        
+        return result;
+    }
+    
+    public List<Player> getPlayers (Entity e, int radius) {
+        List<Player> result = new ArrayList<>();
+        int ex = e.getX();
+        int ey = e.getY();
+        
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            int x = player.getX();
+            int y = player.getY();
+            
+            int dx = Math.abs(x - ex);
+            int dy = Math.abs(y - ey);
+            
+            double distance = Math.sqrt((dx * dx) + (dy * dy));
+            
+            if(distance <= radius) {
+                result.add(player);
+            }
+        }
+        return result;
     }
 
     public Tile getTile(int x, int y) {
@@ -136,9 +208,7 @@ public class Level {
         }
 
         /**
-         * Hiekka = 0xFFFFFF00 
-         * Betoni = 0xFF808080 
-         * Kaktus hiekalla = 0xFFAAD800
+         * Hiekka = 0xFFFFFF00 Betoni = 0xFF808080 Kaktus hiekalla = 0xFFAAD800
          * Kivi hiekalla = 0xFFCEAC00
          */
         if (tiles[x + y * width] == Tile.col_sand) {

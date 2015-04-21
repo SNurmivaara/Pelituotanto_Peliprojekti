@@ -23,7 +23,6 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
-import wildwestshootout.entity.mob.Civilian;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.input.Keyboard;
@@ -88,7 +87,7 @@ public class Game extends Canvas implements Runnable {
         level = new FirstLevel("/levels/FirstLevel.png");
         TileCoordinate playerSpawn = new TileCoordinate(31, 31);
         player = new Player(playerSpawn.x(), playerSpawn.y(), key);
-        player.init(level);
+        level.add(player);
         addKeyListener(key);
         
         Mouse mouse = new Mouse();
@@ -160,7 +159,6 @@ public class Game extends Canvas implements Runnable {
     
     public void update() {
         key.update();
-        player.update();
         level.update();
     }
     
@@ -176,10 +174,9 @@ public class Game extends Canvas implements Runnable {
         
         //Tyhjennetään ruutu ja sen jälkeen renderöidään uudestaan
         screen.clear();
-        int xScroll = player.x - screen.width / 2;
-        int yScroll = player.y - screen.height / 2;
+        int xScroll = player.getX() - screen.width / 2;
+        int yScroll = player.getY() - screen.height / 2;
         level.render(xScroll, yScroll, this.screen);
-        player.render(screen);
         //screen.renderSheet(40, 40, SpriteSheet.player_right, false);
         
         //Kopioidaan pixels[] muuttujan arvot screen.pixels[] muuttujaan

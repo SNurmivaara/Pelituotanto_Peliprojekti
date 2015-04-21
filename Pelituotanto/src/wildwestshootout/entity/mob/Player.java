@@ -34,7 +34,6 @@ public class Player extends Mob {
 
     private Keyboard input;
     private Sprite sprite;
-    private int animation = 0;
     private boolean walking = false;
     private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 8);
     private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 8);

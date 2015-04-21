@@ -223,6 +223,31 @@ public class Level {
         if (tiles[x + y * width] == Tile.col_sandRock) {
             return Tile.sandRock;
         }
+        if (tiles[x + y * width] == Tile.col_fenceVertical) {
+            return Tile.fenceVertical;
+        }
+        if (tiles[x + y * width] == Tile.col_fenceHorizontal) {
+            return Tile.fenceHorizontal;
+        }
+        if (tiles[x + y * width] == Tile.col_fenceSE) {
+            return Tile.fenceSE;
+        }
+        if (tiles[x + y * width] == Tile.col_fenceSW) {
+            return Tile.fenceSW;
+        }
+        if (tiles[x + y * width] == Tile.col_fenceNW) {
+            return Tile.fenceNW;
+        }
+        if (tiles[x + y * width] == Tile.col_fenceNE) {
+            return Tile.fenceNE;
+        }
+        /*
+        fenceVertical = new Sprite(16, 4, 0, SpriteSheet.tiles);
+    public static Sprite fenceHorizontal = new Sprite(16, 5, 0, SpriteSheet.tiles);
+    public static Sprite fenceSE = new Sprite(16, 6, 0, SpriteSheet.tiles);
+    public static Sprite fenceSW = new Sprite(16, 7, 0, SpriteSheet.tiles);
+    public static Sprite fenceNW = new Sprite(16, 8, 0, SpriteSheet.tiles);
+    public static Sprite fenceNE*/
 
         return Tile.voidTile;
     }

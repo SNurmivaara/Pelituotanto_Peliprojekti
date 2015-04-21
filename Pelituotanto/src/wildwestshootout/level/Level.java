@@ -160,41 +160,41 @@ public class Level {
         List<Entity> result = new ArrayList<>();
         int ex = e.getX();
         int ey = e.getY();
-        
+
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
             int x = entity.getX();
             int y = entity.getY();
-            
+
             int dx = Math.abs(x - ex);
             int dy = Math.abs(y - ey);
-            
+
             double distance = Math.sqrt((dx * dx) + (dy * dy));
-            
-            if(distance <= radius) {
+
+            if (distance <= radius) {
                 result.add(entity);
             }
         }
-        
+
         return result;
     }
-    
-    public List<Player> getPlayers (Entity e, int radius) {
+
+    public List<Player> getPlayers(Entity e, int radius) {
         List<Player> result = new ArrayList<>();
         int ex = e.getX();
         int ey = e.getY();
-        
+
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             int x = player.getX();
             int y = player.getY();
-            
+
             int dx = Math.abs(x - ex);
             int dy = Math.abs(y - ey);
-            
+
             double distance = Math.sqrt((dx * dx) + (dy * dy));
-            
-            if(distance <= radius) {
+
+            if (distance <= radius) {
                 result.add(player);
             }
         }
@@ -242,12 +242,12 @@ public class Level {
             return Tile.fenceNE;
         }
         /*
-        fenceVertical = new Sprite(16, 4, 0, SpriteSheet.tiles);
-    public static Sprite fenceHorizontal = new Sprite(16, 5, 0, SpriteSheet.tiles);
-    public static Sprite fenceSE = new Sprite(16, 6, 0, SpriteSheet.tiles);
-    public static Sprite fenceSW = new Sprite(16, 7, 0, SpriteSheet.tiles);
-    public static Sprite fenceNW = new Sprite(16, 8, 0, SpriteSheet.tiles);
-    public static Sprite fenceNE*/
+         fenceVertical = new Sprite(16, 4, 0, SpriteSheet.tiles);
+         public static Sprite fenceHorizontal = new Sprite(16, 5, 0, SpriteSheet.tiles);
+         public static Sprite fenceSE = new Sprite(16, 6, 0, SpriteSheet.tiles);
+         public static Sprite fenceSW = new Sprite(16, 7, 0, SpriteSheet.tiles);
+         public static Sprite fenceNW = new Sprite(16, 8, 0, SpriteSheet.tiles);
+         public static Sprite fenceNE*/
 
         return Tile.voidTile;
     }

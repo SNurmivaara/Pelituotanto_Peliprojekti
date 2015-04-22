@@ -41,11 +41,11 @@ public class SpriteSheet {
     public static SpriteSheet projectile_musket = new SpriteSheet("/textures/sheets/projectiles/projectile_musket.png", 48);
     
     //Pelaajan tekstuurit
-    public static SpriteSheet player = new SpriteSheet("/textures/sheets/player/player_sheet.png", 256, 128);
-    public static SpriteSheet player_right = new SpriteSheet(player, 0, 0, 8, 1, 32);
-    public static SpriteSheet player_left = new SpriteSheet(player, 0, 3, 8, 1, 32);
-    public static SpriteSheet player_up = new SpriteSheet(player, 0, 2, 8, 1, 32);
-    public static SpriteSheet player_down = new SpriteSheet(player, 0, 1, 8, 1, 32);
+    public static SpriteSheet player = new SpriteSheet("/textures/sheets/player/player_sheet.png", 48, 64);
+    public static SpriteSheet player_right = new SpriteSheet(player, 0, 0, 3, 1, 16);
+    public static SpriteSheet player_left = new SpriteSheet(player, 0, 1, 3, 1, 16);
+    public static SpriteSheet player_up = new SpriteSheet(player, 0, 2, 3, 1, 16);
+    public static SpriteSheet player_down = new SpriteSheet(player, 0, 3, 3, 1, 16);
 
     //Siviilin tekstuurit
     public static SpriteSheet civilian = new SpriteSheet("/textures/sheets/mobs/civilian_sheet.png",256, 128);

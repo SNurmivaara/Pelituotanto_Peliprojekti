@@ -35,10 +35,10 @@ public class Player extends Mob {
     private Keyboard input;
     private Sprite sprite;
     private boolean walking = false;
-    private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 8);
-    private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 8);
-    private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 8);
-    private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 8);
+    private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 16, 16, 3);
+    private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 16, 16, 3);
+    private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 16, 16, 3);
+    private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 16, 16, 3);
 
     private AnimatedSprite animSprite = down;
 

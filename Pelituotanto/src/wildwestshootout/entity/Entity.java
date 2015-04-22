@@ -16,6 +16,7 @@
  */
 package wildwestshootout.entity;
 
+import java.awt.Rectangle;
 import java.util.Random;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
@@ -28,12 +29,16 @@ import wildwestshootout.level.Level;
 public class Entity {
     
     protected double x, y;
-    protected Sprite sprite;
+    public Sprite sprite;
     private boolean removed = false;
     protected Level level;
     protected final Random random = new Random();
     
     public Entity() {
+    }
+    
+    public void gotHit(int damage){
+        
     }
     
     public Entity(int x, int y, Sprite sprite) {
@@ -74,6 +79,10 @@ public class Entity {
     
     public void init(Level level) {
         this.level = level;
+    }
+    
+    public Rectangle getBounds() {
+        return new Rectangle((int) x,(int) y, sprite.getWidth(), sprite.getHeight());
     }
     
 }

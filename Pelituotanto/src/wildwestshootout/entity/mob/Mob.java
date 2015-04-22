@@ -16,9 +16,13 @@
  */
 package wildwestshootout.entity.mob;
 
+import java.awt.Rectangle;
+import java.util.List;
+import wildwestshootout.Game;
 import wildwestshootout.entity.projectile.BulletProjectile;
 import wildwestshootout.entity.Entity;
 import wildwestshootout.entity.projectile.Projectile;
+import wildwestshootout.entity.spawner.ParticleSpawner;
 import wildwestshootout.graphics.Screen;
 
 /**
@@ -29,6 +33,7 @@ public abstract class Mob extends Entity {
 
     protected boolean moving = false;
     protected boolean walking = false;
+    protected int health = 1;
     protected double speed = 1;
 
     protected enum Direction {
@@ -37,6 +42,11 @@ public abstract class Mob extends Entity {
     }
 
     protected Direction direction;
+    
+    @Override
+    public void gotHit(int damage) {
+        this.health -= damage;
+    }
 
     public void move(double xa, double ya) {
         //Jos liikutaan kahdella akselilla, suoritetaan kaksi move() metodia
@@ -77,7 +87,7 @@ public abstract class Mob extends Entity {
                 xa = 0;
             }
         }
-        
+
         while (ya != 0) {
             if (Math.abs(ya) > 1) {
                 if (!collision(xa, abs(ya))) {
@@ -130,5 +140,18 @@ public abstract class Mob extends Entity {
         }
         return solid;
     }
-
+    
+    protected void gotHit() {
+        Rectangle mob = new Rectangle((int) x, (int) y, this.sprite.getWidth(), this.sprite.getHeight());
+        List<Projectile> projectiles = level.getProjectiles();
+        for (Projectile p : projectiles) {
+            Rectangle projectile = new Rectangle((int) p.getX(), (int) p.getY(), p.sprite.getHeight(), p.sprite.getHeight());
+            if (mob.intersects(projectile)) {
+                level.add(new ParticleSpawner((int) x, (int) y, 40, 15, level));
+                p.remove();
+                this.health -= BulletProjectile.DAMAGE;
+                level.getClientPlayer().scored();
+            }
+        }
+    }
 }

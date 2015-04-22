@@ -18,11 +18,13 @@ package wildwestshootout;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
+import wildwestshootout.entity.mob.Chaser;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.input.Keyboard;
@@ -54,6 +56,7 @@ public class Game extends Canvas implements Runnable {
     private Keyboard key;
     private Level level;
     private Player player;
+    private int spawn = 25;
     
     //Tarkistus onko peli käynnissä. True = käynnissä | False = suljettu
     private boolean running = false;
@@ -113,6 +116,10 @@ public class Game extends Canvas implements Runnable {
             e.printStackTrace();
         }
     }
+    
+    public void endGame() {
+        stop();
+    }
 
     
     //Pelin suoritusmetodi. Huom! run toimii sen takia että Game() luokka implements Runnable
@@ -146,6 +153,7 @@ public class Game extends Canvas implements Runnable {
             //Sekuntin välein päivitettävä UPS ja FPS laskuri joka näkyy ohjelman ikkunassa
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
+                level.add(new Chaser(35, 35));
                 System.out.println(updates + " ups, " + frames + " fps");
                 frame.setTitle(title + " | " + updates + " ups, " + frames + " fps");
                 updates = 0;
@@ -186,6 +194,8 @@ public class Game extends Canvas implements Runnable {
         //Piirretään kuva
         Graphics g = bs.getDrawGraphics();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+        g.setFont(new Font("TimesRoman" , Font.BOLD, 16));
+        g.drawString("Score: " + player.getScore(), 55, 55);
         g.dispose();
         bs.show();
     }

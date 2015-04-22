@@ -68,7 +68,7 @@ public class Sprite {
     public static Sprite musketBullet = new Sprite(16, 0, 0, SpriteSheet.projectile_musket);
     
     //Partikkelit
-    public static Sprite particle_normal = new Sprite(2, 0xAAAAAA);
+    public static Sprite particle_normal = new Sprite(2, 0xFF575757);
 
     //Konstruktorit
     protected Sprite(SpriteSheet sheet, int width, int height) {

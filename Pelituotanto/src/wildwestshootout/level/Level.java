@@ -34,6 +34,7 @@ public class Level {
     protected int width, height;
     protected int[] tilesInt;
     protected int[] tiles;
+    private int time;
 
     private List<Entity> entities = new ArrayList<>();
     private List<Projectile> projectiles = new ArrayList<>();
@@ -59,6 +60,12 @@ public class Level {
     }
 
     public void update() {
+        if (time >= Integer.MAX_VALUE - 10) {
+            time = 0;
+        } else {
+            time++;
+        }
+        
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).update();
         }
@@ -71,6 +78,7 @@ public class Level {
         for (int i = 0; i < players.size(); i++) {
             players.get(i).update();
         }
+
         remove();
     }
 
@@ -196,6 +204,28 @@ public class Level {
 
             if (distance <= radius) {
                 result.add(player);
+            }
+        }
+        return result;
+    }
+
+    public List<Projectile> getProjectiles(Entity e, int radius) {
+        List<Projectile> result = new ArrayList<>();
+        double ex = e.getX();
+        double ey = e.getY();
+
+        for (int i = 0; i < projectiles.size(); i++) {
+            Projectile projectile = projectiles.get(i);
+            double x = projectile.getX();
+            double y = projectile.getY();
+
+            double dx = Math.abs(x - ex);
+            double dy = Math.abs(y - ey);
+
+            double distance = Math.sqrt((dx * dx) + (dy * dy));
+
+            if (distance <= radius) {
+                result.add(projectile);
             }
         }
         return result;

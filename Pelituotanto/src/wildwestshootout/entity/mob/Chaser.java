@@ -16,7 +16,11 @@
  */
 package wildwestshootout.entity.mob;
 
+import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
+import wildwestshootout.entity.projectile.BulletProjectile;
+import wildwestshootout.entity.projectile.Projectile;
 import wildwestshootout.graphics.AnimatedSprite;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
@@ -44,14 +48,15 @@ public class Chaser extends Mob {
         this.speed = 1;
         this.x = x << 4;
         this.y = y << 4;
-        sprite = Sprite.civilian;
+        this.sprite = Sprite.civilian;
+        this.health = 1;
     }
 
     private void move() {
         xa = 0;
         ya = 0;
 
-        List<Player> players = level.getPlayers(this, 100);
+        List<Player> players = level.getPlayers(this, 1000);
         Player player = level.getClientPlayer();
 
         if (players.size() > 0) {
@@ -80,6 +85,12 @@ public class Chaser extends Mob {
     @Override
     public void update() {
         time++;
+        
+        this.gotHit();
+
+        if (this.health <= 0) {
+            this.remove();
+        }
 
         move();
 
@@ -104,7 +115,22 @@ public class Chaser extends Mob {
             direction = Direction.RIGHT;
         }
 
-        boolean solid = false;
+        if (!stuck()) {
+            sprite = animSprite;
+        } else {
+            animSprite.setFrame(0);
+        }
+
+    }
+
+    @Override
+    public void render(Screen screen) {
+        sprite = animSprite.getSprite();
+        screen.renderMob((int) x, (int) y, this);
+    }
+
+    private boolean stuck() {
+        boolean stuck = false;
         for (int c = 0; c < 4; c++) {
             double xt = ((x + xa) - c % 2) / 16;
             double yt = ((y + ya) - c / 2) / 16;
@@ -117,21 +143,10 @@ public class Chaser extends Mob {
                 iy = (int) Math.floor(yt);
             }
             if (level.getTile(ix, iy).solid()) {
-                solid = true;
+                stuck = true;
             }
         }
-        
-        if (solid) {
-            animSprite.setFrame(0);
-        }
-        
-        sprite = animSprite;
-    }
-
-    @Override
-    public void render(Screen screen) {
-        sprite = animSprite.getSprite();
-        screen.renderMob((int) x, (int) y, this);
+        return stuck;
     }
 
 }

@@ -31,7 +31,7 @@ public abstract class Projectile extends Entity {
     protected double x, y;
     protected double nx, ny;
     protected double distance;
-    protected double speed, range, damage;
+    protected double speed, range;
     
     public Projectile(double xOrigin, double yOrigin, double direction) {
         this.xOrigin = xOrigin;
@@ -43,6 +43,16 @@ public abstract class Projectile extends Entity {
     
     public Sprite getSprite(){
         return sprite;
+    }
+    
+    @Override
+    public double getX() {
+        return this.x;
+    }
+    
+    @Override
+    public double getY() {
+        return this.y;
     }
     
     public int getSpriteSize() {

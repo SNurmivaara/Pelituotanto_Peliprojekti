@@ -16,7 +16,10 @@
  */
 package wildwestshootout.entity.mob;
 
+import java.awt.Rectangle;
+import java.util.List;
 import wildwestshootout.Game;
+import wildwestshootout.entity.Entity;
 import wildwestshootout.entity.projectile.BulletProjectile;
 import wildwestshootout.entity.projectile.Projectile;
 import wildwestshootout.graphics.AnimatedSprite;
@@ -32,9 +35,14 @@ import wildwestshootout.input.Mouse;
  */
 public class Player extends Mob {
 
+    public void scored() {
+        this.score += 1;
+    }
+
     private Keyboard input;
     private Sprite sprite;
     private boolean walking = false;
+    private int score;
     private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 16, 16, 3);
     private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 16, 16, 3);
     private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 16, 16, 3);
@@ -46,11 +54,13 @@ public class Player extends Mob {
     private int reloadSpeed = 0;
 
     public Player(Keyboard input) {
+        this.score = 0;
         this.input = input;
         sprite = Sprite.player_front;
     }
 
     public Player(int x, int y, Keyboard input) {
+        this.score = 0;
         this.speed = 1.2;
         this.x = x;
         this.y = y;
@@ -58,8 +68,13 @@ public class Player extends Mob {
         reloadSpeed = BulletProjectile.RELOAD_SPEED;
     }
 
+    public int getScore() {
+        return this.score;
+    }
+
     @Override
     public void update() {
+
         if (walking) {
             animSprite.update();
         } else {
@@ -118,5 +133,4 @@ public class Player extends Mob {
             }
         }
     }
-
 }

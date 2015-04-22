@@ -27,12 +27,12 @@ import wildwestshootout.graphics.Sprite;
 public class BulletProjectile extends Projectile {
 
     public static final int RELOAD_SPEED = 15;
+    public static final int DAMAGE = 1;
 
     public BulletProjectile(double xOrigin, double yOrigin, double direction) {
         super(xOrigin, yOrigin, direction);
         range = 200;
         speed = 3;
-        damage = 20;
         sprite = Sprite.musketBullet;
 
         nx = speed * Math.cos(angle);
@@ -41,10 +41,10 @@ public class BulletProjectile extends Projectile {
 
     @Override
     public void update() {
-        if (level.tileCollision((int)(x + nx),(int) (y + ny), 6, 5, 5)) {
-            level.add(new ParticleSpawner((int) x,(int) y, 40, 15, level));
+        if (level.tileCollision((int) (x + nx), (int) (y + ny), 6, 5, 5)) {
+            level.add(new ParticleSpawner((int) x, (int) y, 40, 15, level));
             remove();
-        } 
+        }
         move();
     }
 

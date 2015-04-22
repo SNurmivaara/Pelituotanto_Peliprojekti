@@ -42,6 +42,7 @@ public class Civilian extends Mob {
         this.x = x << 4;
         this.y = y << 4;
         sprite = Sprite.civilian;
+        speed = 0.5;
     }
 
     @Override
@@ -49,8 +50,8 @@ public class Civilian extends Mob {
         time++;
 
         if (time % (random.nextInt(50) + 30) == 0) {
-            xa = random.nextInt(3) - 1;
-            ya = random.nextInt(3) - 1;
+            xa = random.nextInt(2) - speed;
+            ya = random.nextInt(2) - speed;
             if (random.nextInt(4) == 0) {
                 xa = 0;
                 ya = 0;
@@ -83,7 +84,7 @@ public class Civilian extends Mob {
         } else {
             walking = false;
         }
-
+        
         sprite = animSprite;
     }
 

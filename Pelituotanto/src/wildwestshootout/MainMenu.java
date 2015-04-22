@@ -16,59 +16,101 @@
  */
 package wildwestshootout;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *asd
+ * 
  * @author s1200478
  */
+
 
 public class MainMenu extends JFrame {
     
     private MainMenu ikkuna;
-    private JPanel Pohja = new JPanel(new GridLayout(4,6,5,5));
+    private JPanel Napit = new JPanel(new GridLayout(4,6,500,5));
+    private JPanel Pohja = new MainMenuBG();
+    private JPanel TLabelit = new JPanel(new GridLayout(5,9,5,10));
+    private JPanel TPohja = new JPanel(new BorderLayout());
+    private JPanel Nappula = new JPanel(new FlowLayout());
     
-    private JButton btAloita = new JButton("Aloita peli");
-    private JButton btAsetukset = new JButton("Asetukset");
-    private JButton btTekijat = new JButton("Tekijät");
-    private JButton btLopeta = new JButton("Lopeta");
+    private JButton btAloita = new OmaNappi("Aloita peli");
+    private JButton btAsetukset = new OmaNappi("Asetukset");
+    private JButton btTekijat = new OmaNappi("Tekijät");
+    private JButton btLopeta = new OmaNappi("Lopeta");
+    private JButton btTakaisin = new OmaNappi("Takaisin");
     
+    private JLabel lbTekijat = new JLabel("Tekijät:");
+    private JLabel lbTekijatS = new JLabel("Sami Nurmivaara");
+    private JLabel lbTekijatJ = new JLabel("Jesse Vuori");
+    private JLabel lbTekijatT = new JLabel("Toni Liivola");
+    //JLabel testi = new JLabel(new ImageIcon("Menu_background.png"));
+    
+    
+    
+    //Konstruktori
     public MainMenu(){
         this.setTitle("Wild West Shootout!");
-        this.setSize(260, 300);
-        this.setLocation(550, 250);
-        
+        this.setSize(660, 500);
+        this.setLocation(400, 100);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        asettelu();
+        TLabelit.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         this.setVisible(true);
-    }
-    
-    private void asettelu(){
-        Pohja.add(btAloita);
-        Pohja.add(btAsetukset);
-        Pohja.add(btTekijat);
-        Pohja.add(btLopeta);
+        Pohja.setLayout(new FlowLayout(FlowLayout.CENTER,600,150));
+        this.setResizable(false);
+        asettelu();
         
-        //Napin tekstin väri
+    }
+    private void asettelu(){
+        
+        Napit.add(btAloita);
+        Napit.add(btAsetukset);
+        Napit.add(btTekijat);
+        Napit.add(btLopeta);
+        
+        //Nappien tekstin väri
         btAloita.setForeground(Color.BLACK);
         btAsetukset.setForeground(Color.BLACK);
         btTekijat.setForeground(Color.BLACK);
         btLopeta.setForeground(Color.BLACK);
         
-        //Napin taustan väri
-        btAloita.setBackground(Color.GRAY);
-        btAsetukset.setBackground(Color.GRAY);
-        btTekijat.setBackground(Color.GRAY);
-        btLopeta.setBackground(Color.GRAY);
+        //Nappien taustaväri
+        btAloita.setBackground(Color.LIGHT_GRAY);
+        btAsetukset.setBackground(Color.LIGHT_GRAY);
+        btTekijat.setBackground(Color.LIGHT_GRAY);
+        btLopeta.setBackground(Color.LIGHT_GRAY);
         
-        Pohja.setBackground(Color.BLACK);
+        Font fontti = new Font("Liberation Mono",Font.BOLD,20);
+        btAloita.setFont(fontti);
+        btAsetukset.setFont(fontti);
+        btTekijat.setFont(fontti);
+        btLopeta.setFont(fontti);
+        
+        //MenunTausta.setOpaque(false);
+        //Pohja.add(testi);
+        Pohja.add(Napit);
+        Napit.setLocation(0,0);
+        Napit.setBackground(new Color(0,0,0,0));
+        Pohja.setBackground(Color.WHITE);
         this.add(Pohja);
         
         btAloita.addActionListener(new lAloita());
@@ -76,8 +118,6 @@ public class MainMenu extends JFrame {
         btTekijat.addActionListener(new lTekijat());
         btLopeta.addActionListener(new lLopeta());
     }
-    //toinen muutos
-    //muutos2
     class lAloita implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae){
@@ -96,10 +136,49 @@ public class MainMenu extends JFrame {
     class  lTekijat implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae){
-            JOptionPane.showMessageDialog(rootPane, "Sami Nurmivaara\nJesse Vuori\nToni Liivola\nVille Vihervaara\nVille Henriksson", "Tekijät", JOptionPane.PLAIN_MESSAGE);
+            JFrame jframe = new JFrame("");
+            jframe.setResizable(false);
+            jframe.setLocation(645, 230);
+            jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            jframe.setVisible(true);
+            TLabelit.add(lbTekijat);
+            TLabelit.add(lbTekijatS);
+            TLabelit.add(lbTekijatJ);
+            TLabelit.add(lbTekijatT);
+            
+            lbTekijat.setFont(new Font("Liberation Mono",Font.BOLD,16));
+            lbTekijatS.setFont(new Font("Liberation Mono",Font.BOLD,16));
+            lbTekijatJ.setFont(new Font("Liberation Mono",Font.BOLD,16));
+            lbTekijatT.setFont(new Font("Liberation Mono",Font.BOLD,16));
+            
+            Font fontti = new Font("Liberation Mono",Font.BOLD,20);
+            btTakaisin.setFont(fontti);
+            btTakaisin.setBackground(Color.LIGHT_GRAY);
+            
+            Nappula.add(btTakaisin);
+            TLabelit.setBackground(Color.LIGHT_GRAY);          
+            TPohja.add(TLabelit,BorderLayout.CENTER);
+            TPohja.add(Nappula,BorderLayout.PAGE_END);
+            
+            Nappula.setBackground(Color.LIGHT_GRAY);
+            TPohja.setBackground(Color.GRAY);
+            jframe.add(TPohja);
+            jframe.pack();
+            btTakaisin.addActionListener(new lTakaisin(jframe));
+        }
+        
+    }
+      
+    class lTakaisin implements ActionListener{
+        private JFrame ikkuna;
+        public lTakaisin(JFrame ikkuna){
+            this.ikkuna=ikkuna;
+        }
+        @Override
+        public void actionPerformed(ActionEvent a){
+            ikkuna.dispose();
         }
     }
-    
     class lLopeta implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent ae){
@@ -107,7 +186,7 @@ public class MainMenu extends JFrame {
         }
     }
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         MainMenu ikkuna = new MainMenu();
     }
 }

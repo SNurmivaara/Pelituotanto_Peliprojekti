@@ -42,7 +42,7 @@ public class BulletProjectile extends Projectile {
     @Override
     public void update() {
         if (level.tileCollision((int)(x + nx),(int) (y + ny), 6, 5, 5)) {
-            level.add(new ParticleSpawner((int) x,(int) y, 44, 50, level));
+            level.add(new ParticleSpawner((int) x,(int) y, 40, 15, level));
             remove();
         } 
         move();
@@ -64,7 +64,7 @@ public class BulletProjectile extends Projectile {
 
     @Override
     public void render(Screen screen) {
-        screen.renderProjectile((int) x - 10, (int) y - 2, this);
+        screen.renderProjectile((int) x, (int) y, this);
     }
 
 }

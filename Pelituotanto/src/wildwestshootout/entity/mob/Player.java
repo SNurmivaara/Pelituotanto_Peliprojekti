@@ -97,7 +97,7 @@ public class Player extends Mob {
     @Override
     public void render(Screen screen) {
         sprite = animSprite.getSprite();
-        screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
+        screen.renderMob((int) x, (int) y, sprite);
     }
 
     private void updateShooting() {

@@ -112,11 +112,11 @@ public class Screen {
     public void renderMob(int xp, int yp, Sprite sprite) {
         xp -= this.xOffset;
         yp -= this.yOffset;
-        for (int y = 0; y < 32; y++) {
+        for (int y = 0; y < 16; y++) {
             int yAbsolute = y + yp;
-            for (int x = 0; x < 32; x++) {
+            for (int x = 0; x < 16; x++) {
                 int xAbsolute = x + xp;
-                if (xAbsolute < -32 || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) {
+                if (xAbsolute < -16 || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) {
                     break;
                 }
 
@@ -124,7 +124,7 @@ public class Screen {
                     xAbsolute = 0;
                 }
 
-                int col = sprite.pixels[x + y * 32];
+                int col = sprite.pixels[x + y * 16];
                 if (col != 0xFFFF00FF) {
                     pixels[xAbsolute + yAbsolute * width] = col;
                 }
@@ -132,27 +132,31 @@ public class Screen {
             }
         }
     }
-    
+
     public void renderMob(int xp, int yp, Mob mob) {
         xp -= this.xOffset;
         yp -= this.yOffset;
-        for (int y = 0; y < 32; y++) {
+        for (int y = 0; y < 16; y++) {
             int yAbsolute = y + yp;
-            for (int x = 0; x < 32; x++) {
+            for (int x = 0; x < 16; x++) {
                 int xAbsolute = x + xp;
-                if (xAbsolute < -32 || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) {
+                if (xAbsolute < -16 || xAbsolute >= width || yAbsolute < 0 || yAbsolute >= height) {
                     break;
                 }
 
                 if (xAbsolute < 0) {
                     xAbsolute = 0;
                 }
-                
-                
 
-                int col = mob.getSprite().pixels[x + y * 32];
-                if ((mob instanceof Chaser) && col == 0xFFFFFFFF) {
-                    col = 0xFFFF0010;
+                int col = mob.getSprite().pixels[x + y * 16];
+                if ((mob instanceof Chaser) && col == 0xFF307A27) {
+                    col = 0xFFFFF496;
+                }
+                if ((mob instanceof Chaser) && col == 0xFF20511A) {
+                    col = 0xFFD8DB2E;
+                }
+                if ((mob instanceof Chaser) && col == 0xFFC4C4C4) {
+                    col = 0xFF000000;
                 }
                 if (col != 0xFFFF00FF) {
                     pixels[xAbsolute + yAbsolute * width] = col;
@@ -161,13 +165,13 @@ public class Screen {
             }
         }
     }
-    
+
     public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed) {
         if (fixed) {
             xp -= xOffset;
             yp -= yOffset;
         }
-        
+
         for (int y = 0; y < sprite.getHeight(); y++) {
             int ya = y + yp;
             for (int x = 0; x < sprite.getWidth(); x++) {
@@ -179,13 +183,13 @@ public class Screen {
             }
         }
     }
-    
+
     public void renderSheet(int xp, int yp, SpriteSheet sheet, boolean fixed) {
         if (fixed) {
             xp -= xOffset;
             yp -= yOffset;
         }
-        
+
         for (int y = 0; y < sheet.HEIGHT; y++) {
             int ya = y + yp;
             for (int x = 0; x < sheet.WIDTH; x++) {

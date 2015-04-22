@@ -24,7 +24,7 @@ public class AnimatedSprite extends Sprite {
 
     private int frame = 0;
     private Sprite sprite;
-    private int rate = 5;
+    private int rate = 6;
     private int time = 0;
     private int length = -1;
 
@@ -40,11 +40,11 @@ public class AnimatedSprite extends Sprite {
     public void update() {
         time++;
         if (time % rate == 0) {
-            if (frame >= length - 1) {
+            if (frame >= length) {
                 frame = 0;
             } else {
-                frame++;
                 sprite = sheet.getSprites()[frame];
+                frame++;
             }
         }
     }

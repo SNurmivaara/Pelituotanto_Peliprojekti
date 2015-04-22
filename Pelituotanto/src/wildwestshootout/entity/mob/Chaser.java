@@ -28,10 +28,10 @@ import wildwestshootout.graphics.SpriteSheet;
  */
 public class Chaser extends Mob {
 
-    private AnimatedSprite right = new AnimatedSprite(SpriteSheet.civilian_right, 32, 32, 8);
-    private AnimatedSprite left = new AnimatedSprite(SpriteSheet.civilian_left, 32, 32, 8);
-    private AnimatedSprite up = new AnimatedSprite(SpriteSheet.civilian_up, 32, 32, 8);
-    private AnimatedSprite down = new AnimatedSprite(SpriteSheet.civilian_down, 32, 32, 8);
+    private AnimatedSprite right = new AnimatedSprite(SpriteSheet.civilian_right, 16, 16, 3);
+    private AnimatedSprite left = new AnimatedSprite(SpriteSheet.civilian_left, 16, 16, 3);
+    private AnimatedSprite up = new AnimatedSprite(SpriteSheet.civilian_up, 16, 16, 3);
+    private AnimatedSprite down = new AnimatedSprite(SpriteSheet.civilian_down, 16, 16, 3);
 
     private AnimatedSprite animSprite = down;
 
@@ -55,16 +55,16 @@ public class Chaser extends Mob {
         Player player = level.getClientPlayer();
 
         if (players.size() > 0) {
-            if (x < player.getX()) {
+            if (x < (int) player.getX()) {
                 xa += speed;
             }
-            if (x > player.getX()) {
+            if (x > (int) player.getX()) {
                 xa -= speed;
             }
-            if (y < player.getY()) {
+            if (y < (int) player.getY()) {
                 ya += speed;
             }
-            if (y > player.getY()) {
+            if (y > (int) player.getY()) {
                 ya -= speed;
             }
         }
@@ -104,13 +104,34 @@ public class Chaser extends Mob {
             direction = Direction.RIGHT;
         }
 
+        boolean solid = false;
+        for (int c = 0; c < 4; c++) {
+            double xt = ((x + xa) - c % 2) / 16;
+            double yt = ((y + ya) - c / 2) / 16;
+            int ix = (int) Math.ceil(xt);
+            int iy = (int) Math.ceil(yt);
+            if (c % 2 == 0) {
+                ix = (int) Math.floor(xt);
+            }
+            if (c / 2 == 0) {
+                iy = (int) Math.floor(yt);
+            }
+            if (level.getTile(ix, iy).solid()) {
+                solid = true;
+            }
+        }
+        
+        if (solid) {
+            animSprite.setFrame(0);
+        }
+        
         sprite = animSprite;
     }
 
     @Override
     public void render(Screen screen) {
         sprite = animSprite.getSprite();
-        screen.renderMob((int) (x - 16), (int) (y - 16), this);
+        screen.renderMob((int) x, (int) y, this);
     }
 
 }

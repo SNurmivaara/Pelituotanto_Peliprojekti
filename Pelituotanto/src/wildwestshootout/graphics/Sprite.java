@@ -62,7 +62,7 @@ public class Sprite {
     public static Sprite player_right_2 = new Sprite(32, 6, 7, SpriteSheet.tiles);
     
     //Mob-spritet
-    public static Sprite civilian = new Sprite(32, 0, 0, SpriteSheet.civilian_down);
+    public static Sprite civilian = new Sprite(16, 0, 0, SpriteSheet.civilian_down);
     
     //Ammus-spritet
     public static Sprite musketBullet = new Sprite(16, 0, 0, SpriteSheet.projectile_musket);

@@ -21,10 +21,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -157,7 +160,12 @@ public class Game extends Canvas implements Runnable {
             //Sekuntin välein päivitettävä UPS ja FPS laskuri joka näkyy ohjelman ikkunassa
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                level.add(new Chaser(spawns.get(spawn).getX(), spawns.get(spawn).getY()));
+                Rectangle safezone = new Rectangle((int) player.getX() / 16, (int) player.getY() / 16, 8, 8);
+                Rectangle spawnzone = new Rectangle(spawns.get(spawn).getX(), spawns.get(spawn).getY(), 8, 8);
+                System.out.println("Safezone :" + safezone + "Spawnzone: " + spawnzone);
+                if (!safezone.intersects(spawnzone)) {
+                    level.add(new Chaser(spawns.get(spawn).getX(), spawns.get(spawn).getY()));
+                }
 
                 if (spawn >= 7) {
                     spawn = 0;
@@ -170,7 +178,7 @@ public class Game extends Canvas implements Runnable {
                 frames = 0;
             }
         }
-        JOptionPane.showMessageDialog(this, "GAME OVER!\nScore: " + this.player.getScore(), "Game Over!", WIDTH);
+        JOptionPane.showMessageDialog(this, "GAME OVER!\nYour score was: " + this.player.getScore(), "Game Over!", WIDTH);
         stop();
     }
 
@@ -225,14 +233,14 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void addSpawns() {
-        spawns.add(new SpawnPoint(13, 13));
-        spawns.add(new SpawnPoint(12, 31));
-        spawns.add(new SpawnPoint(12, 48));
+        spawns.add(new SpawnPoint(22, 20));
+        spawns.add(new SpawnPoint(20, 39));
+        spawns.add(new SpawnPoint(20, 55));
         spawns.add(new SpawnPoint(29, 49));
-        spawns.add(new SpawnPoint(47, 45));
-        spawns.add(new SpawnPoint(50, 28));
-        spawns.add(new SpawnPoint(50, 13));
-        spawns.add(new SpawnPoint(30, 13));
+        spawns.add(new SpawnPoint(38, 57));
+        spawns.add(new SpawnPoint(59, 57));
+        spawns.add(new SpawnPoint(58, 37));
+        spawns.add(new SpawnPoint(57, 21));
     }
 
 }

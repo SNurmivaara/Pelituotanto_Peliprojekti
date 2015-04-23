@@ -124,6 +124,7 @@ public class Player extends Mob {
            Rectangle mob = m.getBounds();
             if (mob.intersects(player)) {
                 level.add(new ParticleSpawner((int) x, (int) y, 40, 100, 2, level));
+                level.add(new ParticleSpawner((int) x, (int) y, 40, 100, 1, level));
                 m.remove();
                 this.health -= 1;
             }

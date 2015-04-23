@@ -47,7 +47,6 @@ public class Particle extends Entity {
         } else {
             sprite = Sprite.particle_normal;
         }
-        
 
         this.xa = random.nextGaussian();
         this.ya = random.nextGaussian();
@@ -57,7 +56,7 @@ public class Particle extends Entity {
     @Override
     public void update() {
         time++;
-        
+
         if (time >= 7400) {
             time = 0;
         }
@@ -67,14 +66,14 @@ public class Particle extends Entity {
         }
 
         za -= 0.1;
-        
+
         if (zz < 0) {
             zz = 0;
             za *= -0.6;
             xa *= 0.4;
             ya *= 0.4;
         }
-        
+
         move(xx + xa, (yy + ya) + (zz + za));
     }
 
@@ -93,7 +92,7 @@ public class Particle extends Entity {
         this.yy += ya;
         this.zz += za;
     }
-    
+
     public boolean collision(double x, double y) {
         boolean solid = false;
         for (int c = 0; c < 4; c++) {

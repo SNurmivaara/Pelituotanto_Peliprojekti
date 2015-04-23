@@ -17,6 +17,7 @@
 package wildwestshootout;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -199,10 +200,12 @@ public class Game extends Canvas implements Runnable {
 
         //Piirretään kuva
         Graphics g = bs.getDrawGraphics();
+        Font font = new Font("SansSerif", Font.BOLD, 16);
+        g.setFont(font);
+        g.setColor(Color.black);
         g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-        g.setFont(new Font("TimesNewRoman", Font.BOLD, 16));
-        g.drawString("Score: " + player.getScore(), 25, 55);
-        g.drawString("Health: " + player.getHealth(), 25, 75);
+        g.drawString("Score: " + player.getScore(), 15, 25);
+        g.drawString("Health: " + player.getHealth(), 15, 45);
         g.dispose();
         bs.show();
     }

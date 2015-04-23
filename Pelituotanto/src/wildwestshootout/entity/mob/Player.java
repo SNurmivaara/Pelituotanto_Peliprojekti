@@ -17,11 +17,13 @@
 package wildwestshootout.entity.mob;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 import wildwestshootout.Game;
 import wildwestshootout.entity.Entity;
 import wildwestshootout.entity.projectile.BulletProjectile;
 import wildwestshootout.entity.projectile.Projectile;
+import wildwestshootout.entity.spawner.ParticleSpawner;
 import wildwestshootout.graphics.AnimatedSprite;
 import wildwestshootout.graphics.Screen;
 import wildwestshootout.graphics.Sprite;
@@ -38,7 +40,7 @@ public class Player extends Mob {
     public void scored() {
         this.score += 1;
     }
-
+    
     private Keyboard input;
     private Sprite sprite;
     private boolean walking = false;
@@ -54,12 +56,14 @@ public class Player extends Mob {
     private int reloadSpeed = 0;
 
     public Player(Keyboard input) {
+        this.health = 3;
         this.score = 0;
         this.input = input;
         sprite = Sprite.player_front;
     }
 
     public Player(int x, int y, Keyboard input) {
+        this.health = 3;
         this.score = 0;
         this.speed = 1.2;
         this.x = x;
@@ -75,6 +79,8 @@ public class Player extends Mob {
     @Override
     public void update() {
 
+        this.mobCollision();
+        
         if (walking) {
             animSprite.update();
         } else {
@@ -107,6 +113,24 @@ public class Player extends Mob {
         }
         clear();
         updateShooting();
+    }
+    
+    private void mobCollision() {
+        Rectangle player = new Rectangle((int) this.getX(), (int) this.getY(), this.animSprite.getHeight(), this.animSprite.getWidth());
+        List<Mob> mobs = level.getMobs();
+        for (Mob m : mobs) {
+//            Rectangle mob = new Rectangle((int) m.getX(), (int) m.getY(), m.sprite.getHeight(), m.sprite.getHeight());
+           Rectangle mob = m.getBounds();
+            if (mob.intersects(player)) {
+                level.add(new ParticleSpawner((int) x, (int) y, 40, 100, 2, level));
+                m.remove();
+                this.health -= 1;
+            }
+        }
+    }
+    
+    public int getHealth() {
+        return this.health;
     }
 
     @Override

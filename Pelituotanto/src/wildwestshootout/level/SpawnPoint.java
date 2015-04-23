@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2015 Sami Nurmivaara
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,25 +14,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package wildwestshootout.entity.spawner;
-
-import wildwestshootout.entity.particle.Particle;
-import wildwestshootout.level.Level;
+package wildwestshootout.level;
 
 /**
  *
- * @author Sami nurmivaara
+ * @author Sami Nurmivaara
  */
-public class ParticleSpawner extends Spawner {
-
-    private int life;
-
-    public ParticleSpawner(int x, int y, int life, int amount, int type, Level level) {
-        super(x, y, Type.PARTICLE, amount, level);
-        this.life = life;
-        for (int i = 0; i < amount; i++) {
-            level.add(new Particle((double) x,(double) y, life, type));
-        }
+public class SpawnPoint {
+    private int x;
+    private int y;
+    
+    public SpawnPoint(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+    
+    
+    
 }

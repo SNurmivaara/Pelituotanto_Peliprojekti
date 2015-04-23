@@ -23,7 +23,11 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import static java.awt.image.ImageObserver.WIDTH;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import wildwestshootout.entity.mob.Chaser;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.graphics.Screen;
@@ -31,6 +35,7 @@ import wildwestshootout.input.Keyboard;
 import wildwestshootout.input.Mouse;
 import wildwestshootout.level.FirstLevel;
 import wildwestshootout.level.Level;
+import wildwestshootout.level.SpawnPoint;
 import wildwestshootout.level.TileCoordinate;
 
 /**
@@ -38,52 +43,53 @@ import wildwestshootout.level.TileCoordinate;
  * @author Sami nurmivaara Nurmivaara
  */
 public class Game extends Canvas implements Runnable {
+
     private static final long serialVersionUID = 1L;
-    
+
     //Pelin resoluutio (leveys)
     private static int width = 300;
-    
+
     //Pelin resoluutio (korkeus) joka on leveys / aspect ratio (tällä hetkellä aspect ratio 16:9
     private static int height = width / 16 * 9;
-    
+
     //Pelin pikseleiden skaalaus kolminkertaiseksi
     private static int scale = 3;
     public static String title = "Wild West Shootout!";
-    
+
     //Thread, JFrame, Keyboard, Level kutsu
     private Thread thread;
     JFrame frame;
     private Keyboard key;
     private Level level;
     private Player player;
-    private int spawn = 25;
-    
+
+    //Spawnpoint systeem
+    private List<SpawnPoint> spawns = new ArrayList<>();
+    private int spawn = 0;
+
     //Tarkistus onko peli käynnissä. True = käynnissä | False = suljettu
     private boolean running = false;
-    
+
     //Screen luokan kutsu
     private Screen screen;
-    
-    
+
     //BufferedImage määritys sekä pixels-arrayn määritys. Pixels hakee kuvan pixeleiden määrän rasterin ja databufferin avulla getData() komennolla
     private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
-    
-    
+    private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+
     public static int getWindowWidth() {
         return width * scale;
     }
-    
+
     public static int getWindowHeight() {
         return height * scale;
     }
-    
-    
+
     //Pelin konstruktori
     public Game() {
         Dimension size = new Dimension(width * scale, height * scale);
         setPreferredSize(size);
-        
+
         screen = new Screen(width, height);
         frame = new JFrame();
         key = new Keyboard();
@@ -92,52 +98,48 @@ public class Game extends Canvas implements Runnable {
         player = new Player(playerSpawn.x(), playerSpawn.y(), key);
         level.add(player);
         addKeyListener(key);
-        
+
         Mouse mouse = new Mouse();
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
     }
-    
-    
+
     //Pelin aloitusmetodi
     public synchronized void start() {
         running = true;
         thread = new Thread(this, "Game");
         thread.start();
     }
-    
-    
+
     //Pelin lopetusmetodi
     public synchronized void stop() {
         running = false;
+        frame.dispose();
         try {
             thread.join();
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-    
-    public void endGame() {
-        stop();
-    }
 
-    
     //Pelin suoritusmetodi. Huom! run toimii sen takia että Game() luokka implements Runnable
     public void run() {
-        
+
         //Kello pelin toimintaa varten
         long lastTime = System.nanoTime();
         long timer = System.currentTimeMillis();
         final double ns = 1000000000.0 / 60.0;
         double delta = 0;
-        
+
         //Muuttujat Updates-per-second ja frames-per-second varten
         int updates = 0, frames = 0;
-        
+
         requestFocus();
-        
-        while (running) {
-            
+
+        while (running && player.getHealth() > 0) {
+
+            this.addSpawns();
+
             //Timer käynnistys
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -149,28 +151,32 @@ public class Game extends Canvas implements Runnable {
             }
             render();
             frames++;
-            
+
             //Sekuntin välein päivitettävä UPS ja FPS laskuri joka näkyy ohjelman ikkunassa
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                level.add(new Chaser(35, 35));
+                level.add(new Chaser(spawns.get(spawn).getX(), spawns.get(spawn).getY()));
+                if (spawn >= 7) {
+                    spawn = 0;
+                } else {
+                    spawn++;
+                }
                 System.out.println(updates + " ups, " + frames + " fps");
                 frame.setTitle(title + " | " + updates + " ups, " + frames + " fps");
                 updates = 0;
                 frames = 0;
             }
-            
+
         }
+        JOptionPane.showMessageDialog(this, "GAME OVER!\nScore: " + this.player.getScore(), "Game Over!", WIDTH);
         stop();
     }
-    
-    
+
     public void update() {
         key.update();
         level.update();
     }
-    
-    
+
     //Renderöinti-metodi
     public void render() {
         //Luodaan kolminkertainen bufferi (Triple-Buffering)
@@ -179,27 +185,28 @@ public class Game extends Canvas implements Runnable {
             createBufferStrategy(3);
             return;
         }
-        
+
         //Tyhjennetään ruutu ja sen jälkeen renderöidään uudestaan
         screen.clear();
         double xScroll = player.getX() - screen.width / 2;
         double yScroll = player.getY() - screen.height / 2;
         level.render((int) xScroll, (int) yScroll, this.screen);
-        
+
         //Kopioidaan pixels[] muuttujan arvot screen.pixels[] muuttujaan
         for (int i = 0; i < pixels.length; i++) {
             pixels[i] = screen.pixels[i];
         }
-        
+
         //Piirretään kuva
         Graphics g = bs.getDrawGraphics();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-        g.setFont(new Font("TimesRoman" , Font.BOLD, 16));
-        g.drawString("Score: " + player.getScore(), 55, 55);
+        g.setFont(new Font("TimesNewRoman", Font.BOLD, 16));
+        g.drawString("Score: " + player.getScore(), 25, 55);
+        g.drawString("Health: " + player.getHealth(), 25, 75);
         g.dispose();
         bs.show();
     }
-    
+
     public static void main(String[] args) {
         Game game = new Game();
         game.frame.setResizable(false);
@@ -209,8 +216,19 @@ public class Game extends Canvas implements Runnable {
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         game.frame.setLocationRelativeTo(null);
         game.frame.setVisible(true);
-        
+
         game.start();
     }
-    
+
+    public void addSpawns() {
+        spawns.add(new SpawnPoint(13, 13));
+        spawns.add(new SpawnPoint(12, 31));
+        spawns.add(new SpawnPoint(12, 48));
+        spawns.add(new SpawnPoint(29, 49));
+        spawns.add(new SpawnPoint(47, 45));
+        spawns.add(new SpawnPoint(50, 28));
+        spawns.add(new SpawnPoint(50, 13));
+        spawns.add(new SpawnPoint(30, 13));
+    }
+
 }

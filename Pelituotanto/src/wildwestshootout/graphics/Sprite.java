@@ -69,6 +69,7 @@ public class Sprite {
     
     //Partikkelit
     public static Sprite particle_normal = new Sprite(2, 0xFF575757);
+    public static Sprite particle_blood = new Sprite(2, 0xFFDB0003);
 
     //Konstruktorit
     protected Sprite(SpriteSheet sheet, int width, int height) {

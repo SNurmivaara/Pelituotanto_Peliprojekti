@@ -147,7 +147,7 @@ public abstract class Mob extends Entity {
         for (Projectile p : projectiles) {
             Rectangle projectile = new Rectangle((int) p.getX(), (int) p.getY(), p.sprite.getHeight(), p.sprite.getHeight());
             if (mob.intersects(projectile)) {
-                level.add(new ParticleSpawner((int) x, (int) y, 40, 15, level));
+                level.add(new ParticleSpawner((int) x, (int) y, 40, 15, 2, level));
                 p.remove();
                 this.health -= BulletProjectile.DAMAGE;
                 level.getClientPlayer().scored();

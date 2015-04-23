@@ -34,13 +34,20 @@ public class Particle extends Entity {
     protected double xx, yy, zz;
     protected double xa, ya, za;
 
-    public Particle(double x, double y, int life) {
+    public Particle(double x, double y, int life, int type) {
         this.x = x;
         this.y = y;
         this.xx = x;
         this.yy = y;
         this.life = life + (random.nextInt(20) - 10);
-        sprite = Sprite.particle_normal;
+        if (type == 1) {
+            sprite = Sprite.particle_normal;
+        } else if (type == 2) {
+            sprite = Sprite.particle_blood;
+        } else {
+            sprite = Sprite.particle_normal;
+        }
+        
 
         this.xa = random.nextGaussian();
         this.ya = random.nextGaussian();

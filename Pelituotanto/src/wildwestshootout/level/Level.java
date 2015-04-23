@@ -19,6 +19,7 @@ package wildwestshootout.level;
 import java.util.ArrayList;
 import java.util.List;
 import wildwestshootout.entity.Entity;
+import wildwestshootout.entity.mob.Mob;
 import wildwestshootout.entity.mob.Player;
 import wildwestshootout.entity.particle.Particle;
 import wildwestshootout.entity.projectile.Projectile;
@@ -107,6 +108,16 @@ public class Level {
 
     public List<Projectile> getProjectiles() {
         return projectiles;
+    }
+    
+    public List<Mob> getMobs() {
+        List<Mob> mobs = new ArrayList<>();
+        for (Entity e : this.entities) {
+            if(e instanceof Mob && !(e instanceof Player)) {
+                mobs.add((Mob) e);
+            }
+        }
+        return mobs;
     }
 
     private void time() {

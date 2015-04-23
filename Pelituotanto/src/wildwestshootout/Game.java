@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
 
     //Pelin resoluutio (leveys)
-    private static int width = 300;
+    private static int width = 400;
 
     //Pelin resoluutio (korkeus) joka on leveys / aspect ratio (tällä hetkellä aspect ratio 16:9
     private static int height = width / 16 * 9;

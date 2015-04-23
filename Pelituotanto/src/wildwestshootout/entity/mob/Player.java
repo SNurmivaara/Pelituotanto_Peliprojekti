@@ -66,7 +66,7 @@ public class Player extends Mob {
     public Player(int x, int y, Keyboard input) {
         this.health = 3;
         this.score = 0;
-        this.speed = 0.8;
+        this.speed = 1;
         this.x = x;
         this.y = y;
         this.input = input;

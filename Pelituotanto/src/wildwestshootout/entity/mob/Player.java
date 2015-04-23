@@ -58,6 +58,7 @@ public class Player extends Mob {
     public Player(Keyboard input) {
         this.health = 3;
         this.score = 0;
+        this.speed = 0.8;
         this.input = input;
         sprite = Sprite.player_front;
     }
@@ -65,7 +66,7 @@ public class Player extends Mob {
     public Player(int x, int y, Keyboard input) {
         this.health = 3;
         this.score = 0;
-        this.speed = 1.2;
+        this.speed = 0.8;
         this.x = x;
         this.y = y;
         this.input = input;

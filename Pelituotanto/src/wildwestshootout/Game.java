@@ -67,6 +67,7 @@ public class Game extends Canvas implements Runnable {
     //Spawnpoint systeem
     private List<SpawnPoint> spawns = new ArrayList<>();
     private int spawn = 0;
+    private int timeToSpawn = 2000;
 
     //Tarkistus onko peli käynnissä. True = käynnissä | False = suljettu
     private boolean running = false;
@@ -157,6 +158,7 @@ public class Game extends Canvas implements Runnable {
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
                 level.add(new Chaser(spawns.get(spawn).getX(), spawns.get(spawn).getY()));
+
                 if (spawn >= 7) {
                     spawn = 0;
                 } else {
@@ -167,7 +169,6 @@ public class Game extends Canvas implements Runnable {
                 updates = 0;
                 frames = 0;
             }
-
         }
         JOptionPane.showMessageDialog(this, "GAME OVER!\nScore: " + this.player.getScore(), "Game Over!", WIDTH);
         stop();

@@ -162,7 +162,6 @@ public class Game extends Canvas implements Runnable {
                 timer += 1000;
                 Rectangle safezone = new Rectangle((int) player.getX() / 16, (int) player.getY() / 16, 8, 8);
                 Rectangle spawnzone = new Rectangle(spawns.get(spawn).getX(), spawns.get(spawn).getY(), 8, 8);
-                System.out.println("Safezone :" + safezone + "Spawnzone: " + spawnzone);
                 if (!safezone.intersects(spawnzone)) {
                     level.add(new Chaser(spawns.get(spawn).getX(), spawns.get(spawn).getY()));
                 }
